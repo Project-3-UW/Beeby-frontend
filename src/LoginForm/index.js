@@ -7,7 +7,7 @@ export default function LoginForm(props) {
         <form onSubmit={props.submit} className="LoginForm">
             <input onChange={props.change} name="email" value={props.loginState.email} placeholder="email"/>
             <input onChange={props.change} name="password" value={props.loginState.password} placeholder="password"/>
-            <button>Submit</button>
+            <button>Login</button>
         </form>
         </>
     )
