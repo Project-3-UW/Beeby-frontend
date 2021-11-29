@@ -1,0 +1,8 @@
+.wrapper {
+  width: 300px;
+}
+.itemBox {
+  width: 300px;
+  height: 350px;
+  text-overflow: ellipsis;
+}
