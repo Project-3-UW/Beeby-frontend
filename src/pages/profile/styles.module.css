@@ -1,0 +1,8 @@
+.wrapper {
+  box-sizing: border-box;
+  padding: 20px 5vw;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
