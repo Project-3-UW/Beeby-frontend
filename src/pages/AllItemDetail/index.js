@@ -1,16 +1,19 @@
-import {
-  Typography,
-  Box,
-  Card,
-  CardMedia,
-  CardContent,
-  Button,
-  Checkbox,
-} from "@material-ui/core";
+// ADDED by DeAnna
+
+// import {
+//   Typography,
+//   Box,
+//   Card,
+//   CardMedia,
+//   CardContent,
+//   Button,
+//   Checkbox,
+// } from "@material-ui/core";
 import API from '../../utils/API';
 import ItemCard from "../../components/ItemsCards/itemCard";
 import React, { useState, useEffect } from 'react'
 import styles from "./styles.module.css";
+
 
 
 const AllItemDetail = (props) => {
@@ -21,17 +24,17 @@ const AllItemDetail = (props) => {
   API.getItemById().then(res => {
       if(res.data){
         // const itemInfo = res.data
-      console.log(res.data);
-      setItems([...items,res.data]);
+      console.log(res.data[0]);
+      setItems([...items,res.data[0]]);
       // items.push(res.data)
 
     }})}, [])
   const loadItems = () => {
     if (items){
       return items.map((item) =>( <ItemCard 
-      key={item.id} id={item.id} token={props.token} title={item.title} description={item.description} ageRange={item.ageRange} brand={item.brand} model={item.model} condition={item.condition} category={item.category} status={item.status}  />))
-    }
-  }
+      key={item.id} id={item.id} token={props.token} title={item.title} description={item.description} ageRange={item.ageRange} brand={item.brand} model={item.model} condition={item.condition} category={item.category} status={item.status}  email={item.User.email}/>)
+      )
+  }};
   return (
     <div className={styles.wrapper}>
      
