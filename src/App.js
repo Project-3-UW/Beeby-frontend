@@ -1,9 +1,18 @@
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import Home from "./pages/home";
+import Explore from "./pages/explore";
+import SignIn from "./pages/signin";
+import SignUp from "./pages/signup";
+import styles from "./layout.module.css";
+import Header from "./components/header";
+import Profile from "./pages/profile";
 import API from "./utils/API"
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
+import ItemDetail from "./pages/itemDetail";
+import AllItemDetail from "./pages/AllItemDetail";
+import Signout from "./pages/signout";
 // eslint-disable-next-line
-const axios = require("axios");
 
 function App() {
   // eslint-disable-next-line
@@ -113,20 +122,28 @@ function App() {
   }
 
   return (
-    <>
-      <LoginForm
-        submit={handleLoginSubmit}
-        change={handleLoginChange}
-        loginState={loginFormState}
-      />
-      <SignupForm
-        submit={handleSignupSubmit}
-        change={handleSignupChange}
-        signupState={signupFormState}
-      />
-      <h1>Placeholder!</h1>
-      <button onClick = {userLogout}>Logout</button>
-    </>
+    <Router>
+      <div className={styles.wrapper}>
+        <div className={styles.header}>
+          <Header />
+        </div>
+        <div className={styles.content}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/explore" element={<Explore />} />
+
+            <Route path="/explore/items/" element={<AllItemDetail />} />
+
+            <Route path="/profile" element={<Profile />} />
+            {/* <Route path="/profile/items/:id" element={<ItemDetail />} /> */}
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signout" element={<Signout />} />
+          </Routes>
+        </div>
+        <div className={styles.footer}></div>
+      </div>
+    </Router>
   );
 }
 
