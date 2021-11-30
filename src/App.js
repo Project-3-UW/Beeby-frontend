@@ -6,7 +6,8 @@ import SignUp from "./pages/signup";
 import styles from "./layout.module.css";
 import Header from "./components/header";
 import Profile from "./pages/profile";
-import ItemDetail from "./pages/itemDetail";
+// import ItemDetail from "./pages/itemDetail";
+import AllItemDetail from "./pages/AllItemDetail";
 import Signout from "./pages/signout";
 function App() {
   return (
@@ -19,8 +20,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
+
+            <Route path="/explore/items/" element={<AllItemDetail />} />
+
             <Route path="/profile" element={<Profile />} />
-            <Route path="/profile/items/:id" element={<ItemDetail />} />
+            {/* <Route path="/profile/items/:id" element={<ItemDetail />} /> */}
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signout" element={<Signout />} />
