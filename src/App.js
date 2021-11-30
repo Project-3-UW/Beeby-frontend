@@ -26,7 +26,7 @@ function App() {
 
   const [loginFormState, setLoginFormState] = useState ({
     email:"",
-    password:""
+    password:"",
   });
 
   const [signupFormState, setSignupFormState] = useState ({
@@ -37,19 +37,36 @@ function App() {
   useEffect(() => {
     const myToken = localStorage.getItem("token");
     if(myToken){
-      API.getProfile(myToken)
+      API.validateToken(myToken)
       .then(res => {
         setToken(myToken)
-        setUserState({
-          email:res.data.user.email,
-          id:res.data.id
-        })
+        console.log("token valid")
+        // setUserState({
+        //   email:res.user.email,
+        //   id:res.user.id
+        // })
       }).catch(err =>{
         console.log(err)
         localStorage.removeItem("token")
       })
     }
-  })
+  },[])
+
+  const getItems = () =>{
+    //check if token valid, if so call api with token, otherwise 
+    //API also support to pass custom lon/lat data
+
+    if(token && token.length> 0) {//check if token valid
+      API.getItems(token, null)
+    } else {
+      //if user not logged in, prompt for current location
+      const cordinates = {
+        lon: 122, //replace with actual value if needed.
+        lat: 47 //replace with actual value if needed.
+      }
+      API.getItems(null, cordinates)
+    }
+  }
 
   const handleLoginChange = (event) => {
     if (event.target.name === "email") {
@@ -62,7 +79,7 @@ function App() {
         ...loginFormState,
         password: event.target.value,
       });
-    }
+    } 
   };
 
   const handleSignupChange = (event) => {
@@ -81,15 +98,18 @@ function App() {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
+    console.log(loginFormState)
     API.login(loginFormState)
       .then((res) => {
-        console.log(res.data);
-        setUserState({
-          email:res.data.user.email,
-          id:res.data.user.id
-        })
+        console.log(res);
+        // setUserState({
+        //   email:res.user.email,
+        //   id:res.user.id
+        // })
         setToken(res.data.token)
+        console.log(res.data.token)
         localStorage.setItem("token", res.data.token)
+        window.location.href = "/"
       })
       .catch((err) => {
         console.log(err);
@@ -101,13 +121,13 @@ function App() {
     API.signup(signupFormState).then(res => {
       API.login(signupFormState)
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         setUserState({
-          email:res.data.user.email,
-          id:res.data.user.id
+          email:res.user.email,
+          id:res.user.id
         })
-        setToken(res.data.token)
-        localStorage.setItem("token", res.data.token)
+        setToken(res.token)
+        localStorage.setItem("token", res.token)
       })
       .catch((err) => {
         console.log(err);
@@ -129,16 +149,16 @@ function App() {
         </div>
         <div className={styles.content}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home getItems={getItems} />} />
             <Route path="/explore" element={<Explore />} />
 
             <Route path="/explore/items/" element={<AllItemDetail />} />
 
             <Route path="/profile" element={<Profile />} />
             {/* <Route path="/profile/items/:id" element={<ItemDetail />} /> */}
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signout" element={<Signout />} />
+            <Route path="/signup" element={<SignUp submit={handleSignupSubmit} change={handleSignupChange} signupState={signupFormState} />}/>
+            <Route path="/signin" element={<SignIn  submit={handleLoginSubmit} change={handleLoginChange} loginState={loginFormState}/>} />
+            <Route path="/signout" element={<Signout onClick = {userLogout}/>} />
           </Routes>
         </div>
         <div className={styles.footer}></div>
