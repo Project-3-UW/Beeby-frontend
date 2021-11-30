@@ -9,7 +9,9 @@ import {
     Button,
     Checkbox,
   } from "@material-ui/core";
-  import styles from "./styles.module.css";
+import styles from "./styles.module.css";
+// import sendEmailBack from "../../utils/API";
+import SendEmail from "../../utils/email";
 
 
 const ItemCard = (props) => {
@@ -47,11 +49,15 @@ const ItemCard = (props) => {
               <Typography variant="h6" color="text.secondary">
                 Description: {props.description}
               </Typography>
+              <Typography variant="h6" color="text.secondary">
+                
+              <Button onClick={SendEmail} variant="contained" color="primary">
+                Contact
+              </Button>
+          
+              </Typography>
               <Button variant="contained" color="primary">
                 Update
-              </Button>
-              <Button variant="contained" color="primary">
-                Please consider me
               </Button>
             </CardContent>
           </Card>
@@ -68,7 +74,7 @@ const ItemCard = (props) => {
               <Checkbox className={styles.itemImageCheckbox} />
               <img
                 className={styles.itemImage}
-                src="{https://www.vodafone.com.au/images/devices/apple/iphone-13-mini/iphone-13-mini-pink-feature1-m.jpg}"
+                // src="{https://www.vodafone.com.au/images/devices/apple/iphone-13-mini/iphone-13-mini-pink-feature1-m.jpg}"
                 alt=""
               />
             </div>
