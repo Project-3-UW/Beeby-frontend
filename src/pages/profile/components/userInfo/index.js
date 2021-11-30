@@ -18,7 +18,7 @@ const UserInfo = () => {
       <CardActions>
         <FormControl>
           <FormControlLabel control={<Switch />} label="Location" />
-          <FormControlLabel control={<Switch />} label="Notification" />
+          {/* <FormControlLabel control={<Switch />} label="Notification" /> */}
         </FormControl>
       </CardActions>
     </Card>

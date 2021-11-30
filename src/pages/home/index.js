@@ -21,6 +21,7 @@ const Home = () => {
       }
     };
     fetchLatestItems();
+      // eslint-disable-next-line
   }, []);
 
   const { authenticated } = useAuth();

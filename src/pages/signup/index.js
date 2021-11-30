@@ -12,9 +12,16 @@ import styles from "./styles.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signUp } from "./service/request";
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 const SignUp = () => {
   const navigate = useNavigate();
+  
+  // eslint-disable-next-line
 
   const alert = useAlert();
   const [firstname, setFirstname] = useState("");
@@ -23,7 +30,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [allowLocation, setAllowLocation] = useState(true);
-  const [allowNotication, setAllowNotication] = useState(true);
+  // const [allowNotication, setAllowNotication] = useState(true);
 
   const handleSubmit = async () => {
     if (!firstname || !lastname || !email || !password) {
@@ -104,6 +111,22 @@ const SignUp = () => {
           variant="outlined"
         />
       </Box>
+      <Box width="400px" marginTop="20px">
+      <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+        Baby Age Range
+      </Dropdown.Toggle>
+      <Dropdown.Menu
+            className="dropdown" 
+            type="button" 
+            data-toggle="dropdown" 
+            title="babyDoB">
+            <Dropdown.Item >0-6m</Dropdown.Item>
+            <Dropdown.Item>7m-1y</Dropdown.Item>
+            <Dropdown.Item>older than 1y</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+    </Box>
       <Box width="400px" marginTop="10px" display="flex" gap="10px">
         <Typography variant="body2">Already has Account?</Typography>
         <Link to="/signin">Login</Link>
@@ -119,7 +142,7 @@ const SignUp = () => {
             }
             label="Share Location"
           />
-          <FormControlLabel
+           {/* <FormControlLabel
             control={
               <Switch
                 value={allowNotication}
@@ -127,7 +150,7 @@ const SignUp = () => {
               />
             }
             label="Open Notication"
-          />
+          /> */}
         </FormGroup>
       </Box>
       <Box width="400px" marginTop="40px">
