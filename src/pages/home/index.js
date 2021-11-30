@@ -6,13 +6,14 @@ import styles from "./styles.module.css";
 import { getLatestItems } from "./services/request";
 import { useEffect, useState } from "react";
 import { useAlert } from "react-alert";
-const Home = () => {
+const Home = (props) => {
   const alert = useAlert();
   const [latestItems, setLatestItems] = useState([]);
   useEffect(() => {
     const fetchLatestItems = async () => {
       try {
-        const res = await getLatestItems();
+        const res = await props.getItems();
+        // const res = await getLatestItems();
         if (res && res.data) {
           setLatestItems(res.data);
         }
