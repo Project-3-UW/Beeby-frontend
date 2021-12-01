@@ -16,35 +16,24 @@ import Signout from "./pages/signout";
 
 function App() {
   // eslint-disable-next-line
-  const [userState, setUserState] = useState({
-    email:"",
-    id:0
-  })
+  const [userState, setUserState] = useState({})
 
 // eslint-disable-next-line
   const [token, setToken] = useState("")
-
-  const [loginFormState, setLoginFormState] = useState ({
-    email:"",
-    password:"",
-  });
-
-  const [signupFormState, setSignupFormState] = useState ({
-    email:"",
-    password:""
-  });
 
   useEffect(() => {
     const myToken = localStorage.getItem("token");
     if(myToken){
       API.validateToken(myToken)
       .then(res => {
+        console.log(res)
         setToken(myToken)
+        setUserState({
+          email:res.data.email,
+          id:res.data.id,
+          name: res.data.firstName
+        })
         console.log("token valid")
-        // setUserState({
-        //   email:res.user.email,
-        //   id:res.user.id
-        // })
       }).catch(err =>{
         console.log(err)
         localStorage.removeItem("token")
@@ -68,72 +57,6 @@ function App() {
     }
   }
 
-  const handleLoginChange = (event) => {
-    if (event.target.name === "email") {
-      setLoginFormState({
-        ...loginFormState,
-        email: event.target.value,
-      });
-    } else {
-      setLoginFormState({
-        ...loginFormState,
-        password: event.target.value,
-      });
-    } 
-  };
-
-  const handleSignupChange = (event) => {
-    if (event.target.name === "email") {
-      setSignupFormState({
-        ...signupFormState,
-        email: event.target.value,
-      });
-    } else {
-      setSignupFormState({
-        ...signupFormState,
-        password: event.target.value,
-      });
-    }
-  };
-
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    console.log(loginFormState)
-    API.login(loginFormState)
-      .then((res) => {
-        console.log(res);
-        // setUserState({
-        //   email:res.user.email,
-        //   id:res.user.id
-        // })
-        setToken(res.data.token)
-        console.log(res.data.token)
-        localStorage.setItem("token", res.data.token)
-        window.location.href = "/"
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleSignupSubmit = (e) => {
-    e.preventDefault();
-    API.signup(signupFormState).then(res => {
-      API.login(signupFormState)
-      .then((res) => {
-        console.log(res);
-        setUserState({
-          email:res.user.email,
-          id:res.user.id
-        })
-        setToken(res.token)
-        localStorage.setItem("token", res.token)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    })
-  }
 
   const userLogout = () => {
     setUserState({email:"",id:0})
@@ -149,15 +72,15 @@ function App() {
         </div>
         <div className={styles.content}>
           <Routes>
-            <Route path="/" element={<Home getItems={getItems} />} />
-            <Route path="/explore" element={<Explore />} />
+            <Route path="/" element={<Home  />} />
+            <Route path="/explore" element={<Explore getItems={API.getItems}/>} />
 
             <Route path="/explore/items/" element={<AllItemDetail />} />
 
-            <Route path="/profile" element={<Profile />} />
-            {/* <Route path="/profile/items/:id" element={<ItemDetail />} /> */}
-            <Route path="/signup" element={<SignUp submit={handleSignupSubmit} change={handleSignupChange} signupState={signupFormState} />}/>
-            <Route path="/signin" element={<SignIn  submit={handleLoginSubmit} change={handleLoginChange} loginState={loginFormState}/>} />
+            <Route path="/profile" element={<Profile user={userState} />} />
+            <Route path="/profile/items/:id" element={<ItemDetail />} />
+            <Route path="/signup" element={<SignUp />}/>
+            <Route path="/signin" element={<SignIn />} />
             <Route path="/signout" element={<Signout onClick = {userLogout}/>} />
           </Routes>
         </div>

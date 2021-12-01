@@ -2,6 +2,7 @@ import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
 import styles from "./styles.module.css";
 const Item = ({ item }) => {
   return (
+    
     <div className={styles.wrapper}>
       <Card className={styles.itemBox}>
         <CardMedia
@@ -17,7 +18,7 @@ const Item = ({ item }) => {
             textOverflow="ellipsis"
             color="text.secondary"
           >
-            {item.description}
+            {/* {item.description} */}
           </Typography>
         </CardContent>
       </Card>
