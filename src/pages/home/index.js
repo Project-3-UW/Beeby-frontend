@@ -49,17 +49,12 @@ const Home = () => {
           </Typography>
           <Link to="/signup">
             <Button variant="contained" color="secondary">
-              Singn up
+              Sign up
             </Button>
           </Link>
         </div>
       )}
-      <div className={styles.items}>
-        <Typography variant="h4" component="div" gutterBottom>
-          New Items
-        </Typography>
-        <Items items={latestItems} />
-      </div>
+
     </div>
   );
 };

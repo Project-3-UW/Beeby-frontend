@@ -1,11 +1,21 @@
 import { Typography, Box, Button } from "@material-ui/core";
+import { Link, useNavigate } from "react-router-dom";
 import Items from "../../components/items";
 import UserInfo from "./components/userInfo/index";
 import styles from "./styles.module.css";
-const Profile = () => {
+import React, { useEffect, useState } from "react";
+
+const Profile = (props) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!props.user.name) {
+      navigate("/signin")
+    }
+  },[])
+
   return (
     <div className={styles.wrapper}>
-      <Typography variant="h4">Hi, User</Typography>
+      <Typography variant="h4">Hi, {props.user.name}</Typography>
       <Box width="100%" marginTop="30px">
         <UserInfo />
       </Box>
