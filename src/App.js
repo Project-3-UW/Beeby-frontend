@@ -12,6 +12,58 @@ import ItemDetail from "./pages/itemDetail";
 import Resources from "./pages/resources";
 import Coupons from "./pages/coupons";
 function App() {
+<<<<<<< HEAD
+=======
+  // eslint-disable-next-line
+  const [userState, setUserState] = useState({})
+
+// eslint-disable-next-line
+  const [token, setToken] = useState("")
+
+  useEffect(() => {
+    const myToken = localStorage.getItem("token");
+    if(myToken){
+      API.validateToken(myToken)
+      .then(res => {
+        console.log(res)
+        setToken(myToken)
+        setUserState({
+          email:res.data.email,
+          id:res.data.id,
+          name: res.data.firstName
+        })
+        console.log("token valid")
+      }).catch(err =>{
+        console.log(err)
+        localStorage.removeItem("token")
+      })
+    }
+  },[])
+
+  const getItems = () =>{
+    //check if token valid, if so call api with token, otherwise 
+    //API also support to pass custom lon/lat data
+
+    if(token && token.length> 0) {//check if token valid
+      API.getItems(token, null)
+    } else {
+      //if user not logged in, prompt for current location
+      const cordinates = {
+        lon: 122, //replace with actual value if needed.
+        lat: 47 //replace with actual value if needed.
+      }
+      API.getItems(null, cordinates)
+    }
+  }
+
+
+  const userLogout = () => {
+    setUserState({email:"",id:0})
+    setToken("")
+    localStorage.removeItem("token")
+  }
+
+>>>>>>> aaaa9df95e187e220016c21942d3ec6a45021aa6
   return (
     <Router>
       <div className={styles.wrapper}>
@@ -20,6 +72,7 @@ function App() {
         </div>
         <div className={styles.content}>
           <Routes>
+<<<<<<< HEAD
             <Route path="/" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/profile" element={<Profile />} />
@@ -30,6 +83,18 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signout" element={<Signout />} />
+=======
+            <Route path="/" element={<Home  />} />
+            <Route path="/explore" element={<Explore getItems={API.getItems}/>} />
+
+            <Route path="/explore/items/" element={<AllItemDetail />} />
+
+            <Route path="/profile" element={<Profile user={userState} />} />
+            <Route path="/profile/items/:id" element={<ItemDetail />} />
+            <Route path="/signup" element={<SignUp />}/>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signout" element={<Signout onClick = {userLogout}/>} />
+>>>>>>> aaaa9df95e187e220016c21942d3ec6a45021aa6
           </Routes>
         </div>
         <div className={styles.footer}></div>

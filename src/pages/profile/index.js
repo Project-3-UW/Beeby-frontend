@@ -1,10 +1,15 @@
 import { Typography, Box, Button } from "@material-ui/core";
+<<<<<<< HEAD
 import { useState } from "react";
+=======
+import { Link, useNavigate } from "react-router-dom";
+>>>>>>> aaaa9df95e187e220016c21942d3ec6a45021aa6
 import Items from "../../components/items";
 import AddItem from "../../components/itemDialog";
 import UserInfo from "./components/userInfo/index";
 import { createItem } from "./services/request";
 import styles from "./styles.module.css";
+<<<<<<< HEAD
 import { useAlert } from "react-alert";
 
 const mockItems = [
@@ -87,6 +92,21 @@ const Profile = () => {
         onSubmit={handleSubmit}
       />
       <Typography variant="h4">Hi, User</Typography>
+=======
+import React, { useEffect, useState } from "react";
+
+const Profile = (props) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!props.user.name) {
+      navigate("/signin")
+    }
+  },[])
+
+  return (
+    <div className={styles.wrapper}>
+      <Typography variant="h4">Hi, {props.user.name}</Typography>
+>>>>>>> aaaa9df95e187e220016c21942d3ec6a45021aa6
       <Box width="100%" marginTop="30px">
         <UserInfo />
       </Box>

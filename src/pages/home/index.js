@@ -11,24 +11,27 @@ import Items from "../../components/items";
 import styles from "./styles.module.css";
 import { getLatestItems } from "./services/request";
 
-const Home = () => {
-  const alert = useAlert();
-  const [latestItems, setLatestItems] = useState([]);
-  useEffect(() => {
-    const fetchLatestItems = async () => {
-      try {
-        const res = await getLatestItems();
-        if (res && res.data) {
-          setLatestItems(res.data);
-        }
-      } catch (err) {
-        alert.error(err.response.data);
-      }
-    };
-    fetchLatestItems();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+// const Home = () => {
+//   const alert = useAlert();
+//   const [latestItems, setLatestItems] = useState([]);
+//   useEffect(() => {
+//     const fetchLatestItems = async () => {
+//       try {
+//         const res = await getLatestItems();
+//         if (res && res.data) {
+//           setLatestItems(res.data);
+//         }
+//       } catch (err) {
+//         alert.error(err.response.data);
+//       }
+//     };
+//     fetchLatestItems();
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, []);
 
+import { useEffect, useState } from "react";
+import { useAlert } from "react-alert";
+const Home = (props) => {
   const { authenticated } = useAuth();
   return (
     <div className={styles.wrapper}>
@@ -58,7 +61,7 @@ const Home = () => {
           </Typography>
           <Link to="/signup">
             <Button variant="contained" color="secondary">
-              Singn up
+              Sign up
             </Button>
           </Link>
         </div>
