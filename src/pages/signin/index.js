@@ -1,13 +1,53 @@
 import { TextField, Button, Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Box } from "@material-ui/system";
 import styles from "./styles.module.css";
-
+import API from "../../utils/API"
 
 const SignIn = (props) => {
+  const navigate = useNavigate()
+  const [loginFormState, setLoginFormState] = useState ({
+    email:"",
+    password:"",
+  });
+
+  const [token, setToken] = useState("")
+
+  const [userState, setUserState] = useState({})
+
+  const handleLoginChange = (event) => {
+    if (event.target.name === "email") {
+      setLoginFormState({
+        ...loginFormState,
+        email: event.target.value,
+      });
+    } else {
+      setLoginFormState({
+        ...loginFormState,
+        password: event.target.value,
+      });
+    } 
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log(loginFormState)
+    const res = API.login(loginFormState).then(res=>{
+      setToken(res.data.token)
+      console.log(token)
+      console.log(userState)
+      localStorage.setItem("token", res.data.token)
+      navigate("/")
+      window.location.reload(true);
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
   return (
     <div className={styles.wrapper}>
-      <form onSubmit={props.submit} className="LoginForm"> 
+      <form onSubmit={handleLogin} className="LoginForm"> 
         <Box marginTop="40px">
           <Typography variant="h2" component="div" gutterBottom>
             Sign In
@@ -16,9 +56,9 @@ const SignIn = (props) => {
         <Box width="400px" marginTop="20px">
           <TextField
             fullWidth
-            onChange={props.change}
+            onChange={handleLoginChange}
             name="email"
-            value = {props.loginState.email}
+            value = {loginFormState.email}
             label="Email"
             variant="outlined"
           />
@@ -26,8 +66,8 @@ const SignIn = (props) => {
         <Box width="400px" marginTop="20px">
           <TextField
             fullWidth
-            onChange={props.change}
-            value = {props.loginState.password}
+            onChange={handleLoginChange}
+            value = {loginFormState.password}
             label="Password"
             name="password"
             type="password"
