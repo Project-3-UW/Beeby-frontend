@@ -1,6 +1,10 @@
 import axios from "axios";
+require('dotenv').config();
 
-const URL_PREFIX = "http://localhost:3001"
+
+// const URL_PREFIX = "http://localhost:3001"
+// delploy
+const URL_PREFIX = "https://beeby-backend.herokuapp.com/"
 
 
 export const API = {
