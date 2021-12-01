@@ -70,7 +70,6 @@ const FileUploader = ({
       };
       reader.readAsDataURL(file.file);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files]);
 
   return (

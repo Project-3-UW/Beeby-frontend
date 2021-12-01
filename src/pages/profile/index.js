@@ -1,5 +1,6 @@
 import { Typography, Box, Button } from "@material-ui/core";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Items from "../../components/items";
 import AddItem from "../../components/itemDialog";
 import UserInfo from "./components/userInfo/index";
@@ -64,29 +65,45 @@ const mockItems = [
   },
 ];
 
-const Profile = () => {
-  const alert = useAlert();
+// const Profile = () => {
+//   const alert = useAlert();
 
+//   const [openAddDiloag, setOpenAddDiloag] = useState(false);
+//   const handleClickAdd = () => {
+//     setOpenAddDiloag(true);
+//   };
+
+//   const handleSubmit = async (item) => {
+//     const res = await createItem(item);
+//     console.log(res);
+//     alert.success("Success to Create!");
+//     setOpenAddDiloag(false);
+//   };
+
+//   return (
+//     <div className={styles.wrapper}>
+//       <AddItem
+//         open={openAddDiloag}
+//         onCancel={() => setOpenAddDiloag(false)}
+//         onSubmit={handleSubmit}
+//       />
+//       <Typography variant="h4">Hi, User</Typography>
+
+
+const Profile = (props) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!props.user.name) {
+      navigate("/signin")
+    }
+  },[])
   const [openAddDiloag, setOpenAddDiloag] = useState(false);
-  const handleClickAdd = () => {
-    setOpenAddDiloag(true);
-  };
-
-  const handleSubmit = async (item) => {
-    const res = await createItem(item);
-    console.log(res);
-    alert.success("Success to Create!");
-    setOpenAddDiloag(false);
-  };
-
+    const handleClickAdd = () => {
+      setOpenAddDiloag(true);
+    };
   return (
     <div className={styles.wrapper}>
-      <AddItem
-        open={openAddDiloag}
-        onCancel={() => setOpenAddDiloag(false)}
-        onSubmit={handleSubmit}
-      />
-      <Typography variant="h4">Hi, User</Typography>
+      <Typography variant="h4">Hi, {props.user.name}</Typography>
       <Box width="100%" marginTop="30px">
         <UserInfo />
       </Box>

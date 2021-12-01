@@ -44,6 +44,23 @@ const SignUp = () => {
   const [allowLocation, setAllowLocation] = useState(true);
   // const [allowNotication, setAllowNotication] = useState(true);
 
+
+  useEffect(() => {
+    if (allowLocation) {
+      getLocation()
+        .then((pos) => {
+          setPosition(pos);
+          console.log(pos);
+        })
+        .catch((err) => {
+          alert.error(err);
+        });
+    } else {
+      setPosition([]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allowLocation]);
+
   const renderBabyRange = () => {
     return babyAgeRange.map((range) => {
       return (
@@ -173,22 +190,6 @@ const SignUp = () => {
           variant="outlined"
         />
       </Box>
-      <Box width="400px" marginTop="20px">
-      <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Baby Age Range
-      </Dropdown.Toggle>
-      <Dropdown.Menu
-            className="dropdown" 
-            type="button" 
-            data-toggle="dropdown" 
-            title="babyDoB">
-            <Dropdown.Item >0-6m</Dropdown.Item>
-            <Dropdown.Item>7m-1y</Dropdown.Item>
-            <Dropdown.Item>older than 1y</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-    </Box>
       <Box width="400px" marginTop="10px" display="flex" gap="10px">
         <Typography variant="body2">Already has Account?</Typography>
         <Link to="/signin">Login</Link>
