@@ -29,10 +29,10 @@ const URL_PREFIX = "http://localhost:3001"
         },
         sendEmailBack:()=>{
             return axios.get(`${URL_PREFIX}/api/email/11`)
-        }
-    // getItems:()=>{
-    //     return axios.get(`${URL_PREFIX}/api/items`)
-    // },
+        },
+    getItems:()=>{
+        return axios.get(`${URL_PREFIX}/api/items`)
+    }
     // getItems:()=>{
     //     return axios.get(`${URL_PREFIX}/api/items`)
     // },

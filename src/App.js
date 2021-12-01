@@ -149,8 +149,8 @@ function App() {
         </div>
         <div className={styles.content}>
           <Routes>
-            <Route path="/" element={<Home getItems={getItems} />} />
-            <Route path="/explore" element={<Explore />} />
+            <Route path="/" element={<Home  />} />
+            <Route path="/explore" element={<Explore getItems={API.getItems}/>} />
 
             <Route path="/explore/items/" element={<AllItemDetail />} />
 

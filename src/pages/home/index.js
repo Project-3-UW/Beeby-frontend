@@ -7,23 +7,6 @@ import { getLatestItems } from "./services/request";
 import { useEffect, useState } from "react";
 import { useAlert } from "react-alert";
 const Home = (props) => {
-  const alert = useAlert();
-  const [latestItems, setLatestItems] = useState([]);
-  useEffect(() => {
-    const fetchLatestItems = async () => {
-      try {
-        const res = await props.getItems();
-        // const res = await getLatestItems();
-        if (res && res.data) {
-          setLatestItems(res.data);
-        }
-      } catch (err) {
-        alert.error(err.response.data);
-      }
-    };
-    fetchLatestItems();
-  }, []);
-
   const { authenticated } = useAuth();
   return (
     <div className={styles.wrapper}>
@@ -49,17 +32,12 @@ const Home = (props) => {
           </Typography>
           <Link to="/signup">
             <Button variant="contained" color="secondary">
-              Singn up
+              Sign up
             </Button>
           </Link>
         </div>
       )}
-      <div className={styles.items}>
-        <Typography variant="h4" component="div" gutterBottom>
-          New Items
-        </Typography>
-        <Items items={latestItems} />
-      </div>
+
     </div>
   );
 };
