@@ -1,0 +1,24 @@
+.wrapper {
+  width: 100%;
+}
+.fileInput {
+  display: none;
+}
+.imageBox {
+  position: relative;
+  width: 200px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.imageBox > img {
+  box-shadow: 0 0 4px #333;
+  max-width: 100%;
+  height: 100px;
+}
+.deleteIcon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: black;
+  cursor: pointer;
+}

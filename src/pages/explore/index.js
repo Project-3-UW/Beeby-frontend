@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 const Explore = () => {
   return (
     <div className={styles.wrapper}>
-      <Box height="100%" width="20%">
+      <Box height="100%">
         <Querier />
       </Box>
       <Box height="100%" width="50%">

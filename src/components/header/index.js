@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../auth";
 import styles from "./styles.module.css";
-
+import headerBackground from "../../assets/image/header-bg.jpg";
 const navsData = [
   { label: "Home", path: "/" },
   { label: "Explore", path: "/explore" },
@@ -40,7 +40,18 @@ const Header = () => {
     });
   };
 
-  return <div className={styles.wrapper}>{renderNavs()}</div>;
+  return (
+    <div
+      className={styles.wrapper}
+      style={{
+        background: `url(${headerBackground})`,
+        backgroundSize: "100%",
+        backgroundPosition: "0 -250px",
+      }}
+    >
+      {renderNavs()}
+    </div>
+  );
 };
 
 export default Header;
