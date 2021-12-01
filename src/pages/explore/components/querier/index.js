@@ -6,33 +6,113 @@ const Querier = () => {
     {
       label: "Distance",
       key: "distance",
-      defaultValue: "distance1",
+      defaultValue: "",
       value: "",
       options: [
-        { value: "distance1", label: "Less than 5 miles" },
-        { value: "distance2", label: "More than 5 miles" },
+        { value: "", label: "Show all" },
+        { value: "5-10 miles", label: "5-10 miles" },
+        { value: "10-15 miles", label: "10-15 miles" },
+        { value: "15-20 miles", label: "15-20 miles" },
+        { value: ">20 miles", label: ">20 miles" },
       ],
     },
     {
       label: "Category",
       key: "category",
-      defaultValue: "category1",
+      defaultValue: "",
       value: "",
-      options: [{ value: "category1", label: "Feeding" }],
+      options: [
+        { value: "", label: "Show all" },
+        {
+          value: "Feeding",
+          label: "Feeding",
+        },
+        {
+          value: "Baby food",
+          label: "Baby food",
+        },
+        {
+          value: "Clothing, Shoes & Accessories",
+          label: "Clothing, Shoes & Accessories",
+        },
+        {
+          value: "Car seats & Accessories",
+          label: "Car seats & Accessories",
+        },
+        {
+          value: "Nursery furniture & Decor",
+          label: "Nursery furniture & Decor",
+        },
+        {
+          value: "Baby toys",
+          label: "Baby toys",
+        },
+        {
+          value: "Bathing & Skincare",
+          label: "Bathing & Skincare",
+        },
+        {
+          value: "Diapering",
+          label: "Diapering",
+        },
+        {
+          value: "Strollers",
+          label: "Strollers",
+        },
+        {
+          value: "Pregnancy & Maternity",
+          label: "Pregnancy & Maternity",
+        },
+        {
+          value: "Potty Training",
+          label: "Potty Training",
+        },
+        {
+          value: "Safety Equipment",
+          label: "Safety Equipment",
+        },
+        {
+          value: "Books",
+          label: "Books",
+        },
+        {
+          value: "Others",
+          label: "Others",
+        },
+      ],
     },
     {
       label: "Condition",
       key: "condition",
-      defaultValue: "condition1",
+      defaultValue: "",
       value: "",
-      options: [{ value: "condition1", label: "New" }],
+      options: [
+        { value: "", label: "Show all" },
+        { value: "New", label: "New" },
+        { value: "Used (like new)", label: "Used (like new)" },
+        { value: "Used (normal wear)", label: "Used (normal wear)" },
+        {
+          value: "Used (functional but missing part)",
+          label: "Used (functional but missing part)",
+        },
+        { value: "Other (see description)", label: "Other (see description)" },
+      ],
     },
     {
       label: "Age",
       key: "age",
-      defaultValue: "age1",
+      defaultValue: "",
       value: "",
-      options: [{ value: "age1", label: "0-6m" }],
+      options: [
+        { value: "", label: "Show all" },
+        { value: "0-6m", label: "0-6m" },
+        { value: "6-12m", label: "6-12m" },
+        { value: "12-18m", label: "12-18m" },
+        { value: "18-24m", label: "18-24m" },
+        { value: "2-3 years", label: "2-3 years" },
+        { value: "3-4 years", label: "3-4 years" },
+        { value: "4 years and up", label: "4 years and up" },
+      ],
     },
   ]);
 

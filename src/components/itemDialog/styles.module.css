@@ -1,0 +1,7 @@
+.formControl {
+  margin-top: 10px;
+}
+.forms {
+  display: flex;
+  flex-direction: column;
+}

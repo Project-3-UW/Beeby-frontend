@@ -1,11 +1,16 @@
+import { useEffect, useState } from "react";
+import { useAlert } from "react-alert";
+
 import { Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
+
+import bannerImage from "../../assets/image/banner.jpg";
+
 import { useAuth } from "../../auth";
 import Items from "../../components/items";
 import styles from "./styles.module.css";
 import { getLatestItems } from "./services/request";
-import { useEffect, useState } from "react";
-import { useAlert } from "react-alert";
+
 const Home = () => {
   const alert = useAlert();
   const [latestItems, setLatestItems] = useState([]);
@@ -21,13 +26,16 @@ const Home = () => {
       }
     };
     fetchLatestItems();
-      // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { authenticated } = useAuth();
   return (
     <div className={styles.wrapper}>
-      <div className={styles.banner}>
+      <div
+        className={styles.banner}
+        style={{ background: `url(${bannerImage})` }}
+      >
         <Typography variant="h4" component="div" gutterBottom>
           A place just for you and your little ones
         </Typography>
@@ -37,6 +45,7 @@ const Home = () => {
           </Button>
         </Link>
       </div>
+
       {!authenticated && (
         <div className={styles.invite}>
           <Typography
@@ -54,6 +63,7 @@ const Home = () => {
           </Link>
         </div>
       )}
+
       <div className={styles.items}>
         <Typography variant="h4" component="div" gutterBottom>
           New Items

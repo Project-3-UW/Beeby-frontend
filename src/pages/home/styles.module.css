@@ -4,7 +4,7 @@
 
 .banner {
   width: 100vw;
-  height: 50vh;
+  height: 60vh;
 
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
   justify-content: center;
   gap: 30px;
 
-  background-color: rgb(240, 221, 140);
+  background-size: 100% !important;
 }
 
 .invite {

@@ -6,8 +6,11 @@ import SignUp from "./pages/signup";
 import styles from "./layout.module.css";
 import Header from "./components/header";
 import Profile from "./pages/profile";
-import ItemDetail from "./pages/itemDetail";
+import EditItem from "./pages/editItem";
 import Signout from "./pages/signout";
+import ItemDetail from "./pages/itemDetail";
+import Resources from "./pages/resources";
+import Coupons from "./pages/coupons";
 function App() {
   return (
     <Router>
@@ -20,7 +23,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/profile/items/:id" element={<ItemDetail />} />
+            <Route path="/profile/edit/items/:id" element={<EditItem />} />
+            <Route path="/items/:id" element={<ItemDetail />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/coupons" element={<Coupons />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signout" element={<Signout />} />
