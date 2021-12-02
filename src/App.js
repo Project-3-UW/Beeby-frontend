@@ -72,13 +72,10 @@ function App() {
         <div className={styles.content}>
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/profile/edit/items/:id" element={<EditItem />} /> */}
             <Route path="/items/:id" element={<ItemDetail />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/coupons" element={<Coupons />} />
-            <Route path="/explore" element={<Explore getItems={API.getItems}/>} />
-
-            {/* <Route path="/explore/items/" element={<AllItemDetail />} /> */}
+            <Route path="/explore" element={<Explore token={token}/>} />
 
             <Route path="/profile" element={<Profile user={userState} />} />
             <Route path="/profile/items/:id" element={<ItemDetail />} />

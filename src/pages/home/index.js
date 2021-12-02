@@ -1,35 +1,12 @@
-import { useEffect, useState } from "react";
-import { useAlert } from "react-alert";
-
 import { Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import bannerImage from "../../assets/image/banner.jpg";
 
 import { useAuth } from "../../auth";
-import Items from "../../components/items";
 import styles from "./styles.module.css";
-import { getLatestItems } from "./services/request";
 
-// const Home = () => {
-//   const alert = useAlert();
-//   const [latestItems, setLatestItems] = useState([]);
-//   useEffect(() => {
-//     const fetchLatestItems = async () => {
-//       try {
-//         const res = await getLatestItems();
-//         if (res && res.data) {
-//           setLatestItems(res.data);
-//         }
-//       } catch (err) {
-//         alert.error(err.response.data);
-//       }
-//     };
-//     fetchLatestItems();
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, []);
-
-const Home = (props) => {
+const Home = () => {
   const { authenticated } = useAuth();
   return (
     <div className={styles.wrapper}>
@@ -64,13 +41,6 @@ const Home = (props) => {
           </Link>
         </div>
       )}
-
-      <div className={styles.items}>
-        <Typography variant="h4" component="div" gutterBottom>
-          New Items
-        </Typography>
-        <Items items={getLatestItems()} />
-      </div>
     </div>
   );
 };

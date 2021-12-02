@@ -1,8 +1,12 @@
 import { Typography, Box, Button } from "@material-ui/core";
 import ItemCard from "../../components/itemCard";
 import styles from "./styles.module.css";
+import API from "../../utils/API"
 
 const ItemDetail = () => {
+
+  //use API.getItemById(id) to retrieve item detail
+
   const images = [
     "https://images.unsplash.com/photo-1533827432537-70133748f5c8?w=242&h=121&fit=crop&auto=format",
     "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=242&h=242&fit=crop&auto=format",

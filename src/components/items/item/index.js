@@ -1,7 +1,10 @@
 import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import React, { useEffect, useState } from "react";
+
 const Item = ({ item }) => {
+
   return (
     
     <div className={styles.wrapper}>
