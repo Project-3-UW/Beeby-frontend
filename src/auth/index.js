@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const TOKEN_NAME = "token";
+export const TOKEN_NAME = "token";
 
 function getTokenFromLocal() {
   return localStorage.getItem(TOKEN_NAME);

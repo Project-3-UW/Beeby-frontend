@@ -3,6 +3,20 @@
 }
 .itemBox {
   width: 300px;
-  height: 350px;
+  height: 330px;
   text-overflow: ellipsis;
+}
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }

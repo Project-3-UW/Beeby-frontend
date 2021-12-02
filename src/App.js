@@ -1,6 +1,4 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useEffect, useState } from "react";
 import Home from "./pages/home";
 import Explore from "./pages/explore";
 import SignIn from "./pages/signin";
@@ -8,12 +6,13 @@ import SignUp from "./pages/signup";
 import styles from "./layout.module.css";
 import Header from "./components/header";
 import Profile from "./pages/profile";
-import API from "./utils/API"
-import ItemDetail from "./pages/itemDetail";
-import AllItemDetail from "./pages/AllItemDetail";
+import EditItem from "./pages/editItem";
 import Signout from "./pages/signout";
-// eslint-disable-next-line
-
+import ItemDetail from "./pages/itemDetail";
+import Resources from "./pages/resources";
+import Coupons from "./pages/coupons";
+import React, { useEffect, useState } from "react";
+import API from "./utils/API"
 function App() {
   // eslint-disable-next-line
   const [userState, setUserState] = useState({})
@@ -72,10 +71,11 @@ function App() {
         </div>
         <div className={styles.content}>
           <Routes>
-            <Route path="/" element={<Home  />} />
-            <Route path="/explore" element={<Explore getItems={API.getItems}/>} />
-
-            <Route path="/explore/items/" element={<AllItemDetail />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/items/:id" element={<ItemDetail />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/coupons" element={<Coupons />} />
+            <Route path="/explore" element={<Explore token={token}/>} />
 
             <Route path="/profile" element={<Profile user={userState} />} />
             <Route path="/profile/items/:id" element={<ItemDetail />} />

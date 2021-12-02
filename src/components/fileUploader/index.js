@@ -1,7 +1,7 @@
 import { Button, Box } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useEffect, useState } from "react";
-import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
+
 import styles from "./styles.module.css";
 
 const FileUploader = ({
@@ -86,7 +86,6 @@ const FileUploader = ({
 
         <Button variant="outlined" component="span">
           Upload
-          
         </Button>
       </label>
       {showImages && (

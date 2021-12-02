@@ -1,0 +1,13 @@
+.wrapper {
+  box-sizing: border-box;
+  padding: 20px 5vw;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.supporterCard {
+  margin-right: 3%;
+  margin-top: 15px;
+  width: 30%;
+  box-shadow: 0 0 4px #333;
+}
