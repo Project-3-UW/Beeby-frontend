@@ -65,31 +65,6 @@ const mockItems = [
   },
 ];
 
-// const Profile = () => {
-//   const alert = useAlert();
-
-//   const [openAddDiloag, setOpenAddDiloag] = useState(false);
-//   const handleClickAdd = () => {
-//     setOpenAddDiloag(true);
-//   };
-
-//   const handleSubmit = async (item) => {
-//     const res = await createItem(item);
-//     console.log(res);
-//     alert.success("Success to Create!");
-//     setOpenAddDiloag(false);
-//   };
-
-//   return (
-//     <div className={styles.wrapper}>
-//       <AddItem
-//         open={openAddDiloag}
-//         onCancel={() => setOpenAddDiloag(false)}
-//         onSubmit={handleSubmit}
-//       />
-//       <Typography variant="h4">Hi, User</Typography>
-
-
 const Profile = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -101,6 +76,14 @@ const Profile = (props) => {
     const handleClickAdd = () => {
       setOpenAddDiloag(true);
     };
+
+  const handleSubmit = async (item) => {
+    const res = await createItem(item);
+    console.log(res);
+    alert.success("Success to Create!");
+    setOpenAddDiloag(false);
+  };
+
   return (
     <div className={styles.wrapper}>
       <Typography variant="h4">Hi, {props.user.name}</Typography>
@@ -124,6 +107,11 @@ const Profile = (props) => {
         <Typography variant="h6">Gifted Items</Typography>
         <Items items={mockItems} />
       </Box>
+      <AddItem
+        open={openAddDiloag}
+        onCancel={() => setOpenAddDiloag(false)}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 };
