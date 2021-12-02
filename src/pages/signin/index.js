@@ -84,11 +84,6 @@ const SignIn = (props) => {
             Submit
           </Button>
         </Box>
-      <Box width="400px" marginTop="40px">
-        <Button onClick={handleLogin} variant="contained">
-          Submit
-        </Button>
-      </Box>
       </form>
     </div>
   );

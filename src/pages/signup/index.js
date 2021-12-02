@@ -5,125 +5,114 @@ import {
   TextField,
   Button,
   Typography,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
 } from "@material-ui/core";
-import { useAlert } from "react-alert";
 import { Box } from "@material-ui/system";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { signUp } from "./service/request";
-import { getLocation } from "../../utils/location";
-
-const babyAgeRange = [
-  "0-6m",
-  "6-12m",
-  "12-18m",
-  "18-24m",
-  "2-3 years",
-  "3-4 years",
-  "4 years and up",
-];
+import API from "../../utils/API"
 
 const SignUp = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const [token, setToken] = useState("")
+
+  const [userState, setUserState] = useState({})
+
+  const [signupFormState, setSignupFormState] = useState ({
+    email:"",
+    password:"",
+    firstName:"",
+    lastName:"",
+    // bio:"",
+    // kidDOB:"",
+  });
   
-  // eslint-disable-next-line
-
-  const alert = useAlert();
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [babyAge, setBabyAge] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmedPassword, setConfirmedPassword] = useState("");
-  const [position, setPosition] = useState([]);
-  const [allowLocation, setAllowLocation] = useState(true);
-  // const [allowNotication, setAllowNotication] = useState(true);
-
-
-  useEffect(() => {
-    if (allowLocation) {
-      getLocation()
-        .then((pos) => {
-          setPosition(pos);
-          console.log(pos);
-        })
-        .catch((err) => {
-          alert.error(err);
-        });
-    } else {
-      setPosition([]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allowLocation]);
-
-  const renderBabyRange = () => {
-    return babyAgeRange.map((range) => {
-      return (
-        <MenuItem value={range} key={range}>
-          {range}
-        </MenuItem>
-      );
-    });
-  };
-
-  useEffect(() => {
-    if (allowLocation) {
-      getLocation()
-        .then((pos) => {
-          setPosition(pos);
-          console.log(pos);
-        })
-        .catch((err) => {
-          alert.error(err);
-        });
-    } else {
-      setPosition([]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allowLocation]);
-
-  const handleSubmit = async () => {
-    if (!firstname || !lastname || !email || !password) {
-      alert.error("Please enter all fields!");
-      return;
-    }
-    if (password.length < 8) {
-      alert.error("Password length must more than eight!");
-      return;
-    }
-    if (password !== confirmedPassword) {
-      alert.error("Password is not same as confirm password!!");
-      return;
-    }
-    try {
-      await signUp(
-        firstname,
-        lastname,
-        email,
-        password,
-        position[0],
-        position[1]
-      );
-      alert.success("Success to sign up!!");
-      setTimeout(() => {
-        navigate("/signin");
-      }, 1000);
-    } catch (err) {
-      const errors = err.response.data.err.errors;
-      if (errors[0] && errors[0].message) {
-        alert.error(errors[0].message);
-      }
-      //alert.error(err.response.data);
+  const handleSignupChange = (event) => {
+    if (event.target.name === "email") {
+      setSignupFormState({
+        ...signupFormState,
+        email: event.target.value,
+      });
+    } else if(event.target.name === "password") {
+      setSignupFormState({
+        ...signupFormState,
+        password: event.target.value,
+      });
+    } else if(event.target.name === "firstName") {
+      setSignupFormState({
+        ...signupFormState,
+        firstName: event.target.value,
+      });
+    } else if(event.target.name === "lastName") {
+      setSignupFormState({
+        ...signupFormState,
+        lastName: event.target.value,
+      });
+    } else if(event.target.name === "confirmpassword") {
+      setSignupFormState({
+        ...signupFormState,
+        confirmpassword: event.target.value,
+      });
     }
   };
+
+
+  const handleSignupSubmit = (e) => {
+    e.preventDefault();
+    API.signup(signupFormState).then(res => {
+      API.login(signupFormState)
+      .then((res) => {
+        console.log(res);
+        setUserState({
+          email:res.data.user.email,
+          id:res.data.user.id,
+          name: res.data.user.firstName
+        })
+        setToken(res.data.token)
+        localStorage.setItem("token", res.data.token)
+        navigate("/")
+        window.location.reload(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    })
+  }
+
+
+  const locationSuccess = (pos) => {
+    let crd = pos.coords;
+    let currentState = signupFormState;
+    currentState.longitude = crd.longitude
+    currentState.latitude = crd.latitude
+    setSignupFormState(currentState);
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+  }
+
+  const locationError = (err) => {
+    alert("please allow sharing your location")
+  }
+
+  const handleShareLocation = (e)=>{
+    if(e.target.checked) {
+      navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      })
+    } else {
+      //remove value
+      let currentState = signupFormState;
+      delete currentState.longitude
+      delete currentState.latitude
+      setSignupFormState(currentState);
+    }
+  }
 
   return (
     <div className={styles.wrapper}>
+      <form onSubmit={handleSignupSubmit} className="signupForm"> 
       <Box marginTop="40px">
         <Typography variant="h2" component="div" gutterBottom>
           Sign Up
@@ -133,8 +122,9 @@ const SignUp = () => {
         <TextField
           fullWidth
           label="First name"
-          value={firstname}
-          onChange={(e) => setFirstname(e.target.value)}
+          name="firstName"
+          value={signupFormState.firstName}
+          onChange={handleSignupChange}
           variant="outlined"
         />
       </Box>
@@ -142,8 +132,9 @@ const SignUp = () => {
         <TextField
           fullWidth
           label="Last name"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
+          name="lastName"
+          value={signupFormState.lastName}
+          onChange={handleSignupChange}
           variant="outlined"
         />
       </Box>
@@ -151,31 +142,20 @@ const SignUp = () => {
         <TextField
           fullWidth
           label="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          value={signupFormState.email}
+          onChange={handleSignupChange}
           type="email"
           variant="outlined"
         />
       </Box>
       <Box width="400px" marginTop="20px">
-        <FormControl fullWidth>
-          <InputLabel id="age-range">Age Range</InputLabel>
-          <Select
-            labelId="age-range"
-            label="Baby Age"
-            value={babyAge}
-            onChange={(e) => setBabyAge(e.target.value)}
-          >
-            {renderBabyRange()}
-          </Select>
-        </FormControl>
-      </Box>
-      <Box width="400px" marginTop="20px">
         <TextField
           fullWidth
           label="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          value={signupFormState.password}
+          onChange={handleSignupChange}
           type="password"
           variant="outlined"
         />
@@ -183,45 +163,42 @@ const SignUp = () => {
       <Box width="400px" marginTop="20px">
         <TextField
           fullWidth
-          value={confirmedPassword}
-          onChange={(e) => setConfirmedPassword(e.target.value)}
+          value={signupFormState.confirmpassword}
+          name="confirmpassword"
+          onChange={handleSignupChange}
           label="Confirm Password"
           type="password"
           variant="outlined"
         />
-      </Box>
-      <Box width="400px" marginTop="10px" display="flex" gap="10px">
-        <Typography variant="body2">Already has Account?</Typography>
-        <Link to="/signin">Login</Link>
       </Box>
       <Box width="400px" marginTop="20px">
         <FormGroup>
           <FormControlLabel
             control={
               <Switch
-                defaultChecked={true}
-                value={allowLocation}
-                onChange={(e) => setAllowLocation(e.target.checked)}
+                onChange={handleShareLocation}
               />
             }
             label="Share Location"
           />
-           {/* <FormControlLabel
+          <FormControlLabel
             control={
               <Switch
-                defaultChecked={true}
-                value={allowNotication}
-                onChange={(e) => setAllowNotication(e.target.checked)}
               />
             }
             label="Open Notication"
-          /> */}
+          />
         </FormGroup>
       </Box>
       <Box width="400px" marginTop="40px">
-        <Button onClick={handleSubmit} variant="contained">
+        <Button type="submit" variant="contained">
           Submit
         </Button>
+      </Box>
+      </form>
+      <Box width="400px" marginTop="10px" display="flex" gap="10px">
+        <Typography variant="body2">Already has Account?</Typography>
+        <Link to="/signin">Login</Link>
       </Box>
     </div>
   );
