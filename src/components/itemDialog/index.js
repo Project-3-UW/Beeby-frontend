@@ -134,6 +134,12 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
             onChange={(e) => setAgeRange(e.target.value)}
           >
             <MenuItem value={`0-6m`}>0-6m</MenuItem>
+            <MenuItem value={`6-12m`}>6-12m</MenuItem>
+            <MenuItem value={`12-18m`}>12-18m</MenuItem>
+            <MenuItem value={`18-24m`}>18-24m</MenuItem>
+            <MenuItem value={`2-3y`}>2-3y</MenuItem>
+            <MenuItem value={`3-4y`}>3-4y</MenuItem>
+            <MenuItem value={`4y and up`}>4y and up</MenuItem>
           </Select>
         </FormControl>
 
