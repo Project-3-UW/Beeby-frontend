@@ -106,7 +106,7 @@ const FileUploader = ({
           Upload
         </Button>
         <IKUpload
-          fileName={props}
+          fileName={"users"}
           isPrivateFile={false}
           useUniqueFileName={true}
           responseFields={[""]}
