@@ -1,0 +1,11 @@
+.wrapper {
+  box-sizing: border-box;
+  padding: 20px 5vw;
+  width: 100%;
+}
+.resourceBox {
+  margin-right: 3%;
+  margin-top: 15px;
+  width: 30%;
+  height: 300px;
+}
