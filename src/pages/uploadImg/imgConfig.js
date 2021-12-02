@@ -1,27 +1,3 @@
-// import { IKImage, IKContext, IKUpload } from 'imagekitio-react'
-
-
-// <IKContext publicKey="public_t+4VajkBmNbytb2Sa80EQD4geXo=" authenticationEndpoint="http://localhost:3001/auth">
-//   // Simple file upload and response handling
-//   <IKUpload
-//     onError={onError}
-//     onSuccess={onSuccess}
-//   />
-
-//   // Passing different upload API options
-//   <IKUpload
-//     fileName=".jpg"
-//     tags={[]}
-//     customCoordinates={""}
-//     isPrivateFile={false}
-//     useUniqueFileName={true}
-//     responseFields={[""]}
-//     folder={"/userImg"}
-//     onError={onError}
-//     onSuccess={onSuccess}
-//   />
-// </IKContext>
-
 
 import React from 'react';
 import './App.css';
@@ -29,7 +5,8 @@ import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
 
 const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
 const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
-const authenticationEndpoint = 'http://localhost:3001/auth';
+//change to server with new auth route
+const authenticationEndpoint = 'http://localhost:3001/auth'||'https://beeby-backend.herokuapp.com';
 
 const onError = err => {
   console.log("Error", err);
@@ -50,7 +27,11 @@ function ImgUpload() {
       >
         <p>Upload an image</p>
         <IKUpload
-          fileName="test-upload.png"
+          fileName={props}
+          isPrivateFile={false}
+          useUniqueFileName={true}
+          responseFields={[""]}
+          folder={"/userImg"}
           onError={onError}
           onSuccess={onSuccess}
         />
