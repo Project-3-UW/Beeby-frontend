@@ -68,17 +68,7 @@ const mockItems = [
 // const Profile = () => {
 //   const alert = useAlert();
 
-//   const [openAddDiloag, setOpenAddDiloag] = useState(false);
-//   const handleClickAdd = () => {
-//     setOpenAddDiloag(true);
-//   };
-
-//   const handleSubmit = async (item) => {
-//     const res = await createItem(item);
-//     console.log(res);
-//     alert.success("Success to Create!");
-//     setOpenAddDiloag(false);
-//   };
+// 
 
 //   return (
 //     <div className={styles.wrapper}>

@@ -98,23 +98,7 @@ const FileUploader = ({
           type="file"
         />
 
-      <IKContext 
-        publicKey={publicKey} 
-        urlEndpoint={urlEndpoint} 
-        authenticationEndpoint={authenticationEndpoint}>
-        <Button variant="outlined" component="span">
-          Upload
-        </Button>
-        <IKUpload
-          fileName={"users"}
-          isPrivateFile={false}
-          useUniqueFileName={true}
-          responseFields={[""]}
-          folder={"/userImg"}
-          onError={onError}
-          onSuccess={onSuccess}
-        />
-      </IKContext>
+      
         
       </label>
       {showImages && (
