@@ -1,3 +1,5 @@
+import { useState } from "react";
+import styles from "./styles.module.css";
 import {
   Card,
   CardActions,
@@ -10,9 +12,11 @@ import {
   Select,
   InputLabel,
   Box,
+  Input,
 } from "@material-ui/core";
-import { useState } from "react";
-import styles from "./styles.module.css";
+
+const ariaLabel = {'aria-label': 'description'}
+
 const babyAgeRange = [
   "0-6m",
   "6-12m",
@@ -36,13 +40,13 @@ const UserInfo = () => {
   return (
     <Card className={styles.info}>
       <CardContent>
-        <Typography variant="h5">Settings</Typography>
+        <Typography variant="h5">Personal Information</Typography>
       </CardContent>
       <CardActions>
         <FormControl>
           <FormControlLabel control={<Switch />} label="Location" />
-          <FormControlLabel control={<Switch />} label="Notification" />
-          <Box marginTop="20px">
+          {/* <FormControlLabel control={<Switch />} label="Notification" /> */}
+          {/* <Box marginTop="20px">
             <FormControl fullWidth>
               <InputLabel id="age-range">Baby Age Range</InputLabel>
               <Select
@@ -53,9 +57,9 @@ const UserInfo = () => {
                 onChange={(e) => setBabyAge(e.target.value)}
               >
                 {renderBabyRange()}
-              </Select>
+              // </Select>
             </FormControl>
-          </Box>
+          </Box> */}
         </FormControl>
       </CardActions>
     </Card>

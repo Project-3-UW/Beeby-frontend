@@ -50,7 +50,7 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">Item</DialogTitle>
+      <DialogTitle id="alert-dialog-title">New Item</DialogTitle>
       <DialogContent className={styles.forms}>
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">Title</FormLabel>
@@ -58,6 +58,7 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             variant="outlined"
+            size="small"
           />
         </FormControl>
 
@@ -67,6 +68,7 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             variant="outlined"
+            size="small"
           />
         </FormControl>
 
@@ -79,9 +81,19 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <MenuItem value={`Clothing, Shoes & Accessories`}>
-              Clothing, Shoes & Accessories
-            </MenuItem>
+            <MenuItem value={`Baby food`}>Baby food</MenuItem>
+            <MenuItem value={`Baby toys`}>Baby toys</MenuItem>
+            <MenuItem value={`Books`}>Books</MenuItem>
+            <MenuItem value={`Bathing & Skincare`}>Bathing & Skincare</MenuItem>
+            <MenuItem value={`Clothing, Shoes & Accessories`}>Clothing, Shoes & Accessories</MenuItem>
+            <MenuItem value={`Car seats & Accessories`}>Car seats & Accessories</MenuItem>
+            <MenuItem value={`Diapering`}>Diapering</MenuItem>
+            <MenuItem value={`Feeding`}>Feeding</MenuItem>
+            <MenuItem value={`Nursery furniture & Decor`}>Nursery furniture & Decor</MenuItem>
+            <MenuItem value={`Pregnancy & Maternity`}>Pregnancy & Maternity</MenuItem>
+            <MenuItem value={`Strollers`}>Strollers</MenuItem>
+            <MenuItem value={`Safety Equipment`}>Safety Equipment</MenuItem>
+            <MenuItem value={`Others`}>Others</MenuItem>
           </Select>
         </FormControl>
 
@@ -94,34 +106,32 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
             value={condition}
             onChange={(e) => setCondition(e.target.value)}
           >
+            <MenuItem value={`New`}>New</MenuItem>
             <MenuItem value={`Used (like new)`}>Used (like new)</MenuItem>
+            <MenuItem value={`Used (normal wear)`}>Used (normal wear)</MenuItem>
+            <MenuItem value={`Used (functional but missing part)`}>Used (functional but missing part)</MenuItem>
+            <MenuItem value={`Other (see description)`}>Other (see description)</MenuItem>
           </Select>
         </FormControl>
 
         <FormControl component="fieldset" className={styles.formControl}>
-          <FormLabel component="legend" className={styles.formItem}>
-            Brand
-          </FormLabel>
-          <Select
-            size="small"
+          <FormLabel component="legend">Brand</FormLabel>
+          <TextField
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
-          >
-            <MenuItem value={`Gap`}>Gap</MenuItem>
-          </Select>
+            variant="outlined"
+            size="small"
+          />
         </FormControl>
 
         <FormControl component="fieldset" className={styles.formControl}>
-          <FormLabel component="legend" className={styles.formItem}>
-            Model
-          </FormLabel>
-          <Select
-            size="small"
+          <FormLabel component="legend">Model</FormLabel>
+          <TextField
             value={model}
             onChange={(e) => setModel(e.target.value)}
-          >
-            <MenuItem value={`Blossom`}>Blossom</MenuItem>
-          </Select>
+            variant="outlined"
+            size="small"
+          />
         </FormControl>
 
         <FormControl component="fieldset" className={styles.formControl}>
@@ -134,6 +144,12 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
             onChange={(e) => setAgeRange(e.target.value)}
           >
             <MenuItem value={`0-6m`}>0-6m</MenuItem>
+            <MenuItem value={`6-12m`}>6-12m</MenuItem>
+            <MenuItem value={`12-18m`}>12-18m</MenuItem>
+            <MenuItem value={`18-24m`}>18-24m</MenuItem>
+            <MenuItem value={`2-3 years`}>2-3 years</MenuItem>
+            <MenuItem value={`3-4 years`}>3-4 years</MenuItem>
+            <MenuItem value={`4 years and up`}>4 years and up</MenuItem>
           </Select>
         </FormControl>
 
@@ -169,7 +185,6 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
         <Box width="600px">
           <FormControl component="fieldset" className={styles.formControl}>
             <FormLabel component="legend" className={styles.formItem}>
-              Main Photo
             </FormLabel>
             <FileUploader onFilesChange={handleFilesChange} multiple={false} />
           </FormControl>
