@@ -1,13 +1,9 @@
 import { Button, Box } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useEffect, useState } from "react";
-import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
+
 import styles from "./styles.module.css";
 
-const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
-const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
-//change to server with new auth route
-const authenticationEndpoint = 'http://localhost:3001/auth'||'https://beeby-backend.herokuapp.com';
 
 const FileUploader = ({
   onFilesChange,
@@ -38,13 +34,6 @@ const FileUploader = ({
     );
   };
 
-  const onError = err => {
-    console.log("Error", err);
-  };
-  
-  const onSuccess = res => {
-    console.log("Success", res);
-  };
   
 
   const renderImages = () => {
@@ -97,9 +86,6 @@ const FileUploader = ({
           id={fileInputId}
           type="file"
         />
-
-      
-        
       </label>
       {showImages && (
         <Box width="100%" display="flex" flexWrap="wrap">
