@@ -5,45 +5,36 @@ import React, { useEffect, useState } from "react";
 
 const Item = ({ item }) => {
 
+  const itemUrl = "/items/" + item.id;
+  let itemImg;
+  if (item.ItemImgs.length > 0) {
+    itemImg = <CardMedia
+      component="img"
+      image={item.ItemImgs[0].url}
+    />;
+  } else {
+    itemImg = <CardMedia
+      component="img"
+      image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+    />
+  }
+
   return (
-    
     <div className={styles.wrapper}>
-      <Link to="/items/4">
+      <Link to={itemUrl}>
         <Card className={styles.itemBox}>
-          <CardMedia
-            component="img"
-            image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-          />
-          <CardContent>
-            <Typography
-              className={styles.title}
-              variant="h5"
-              gutterBottom
-              component="div"
-            >
-              {item.title}
-            </Typography>
-            <Typography
-              className={styles.description}
-              variant="body2"
-              textOverflow="ellipsis"
-              color="text.secondary"
-            >
-              {item.description}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Link>
-      <Card className={styles.itemBox}>
-        <CardMedia
-          component="img"
-          image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-        />
         <CardContent>
-          <Typography variant="h5" gutterBottom component="div">
+          {itemImg}
+          <Typography
+            className={styles.title}
+            variant="h5"
+            gutterBottom
+            component="div"
+          >
             {item.title}
           </Typography>
           <Typography
+            className={styles.description}
             variant="body2"
             textOverflow="ellipsis"
             color="text.secondary"
@@ -52,7 +43,8 @@ const Item = ({ item }) => {
           </Typography>
         </CardContent>
       </Card>
-    </div>
+    </Link>
+    </div >
   );
 };
 

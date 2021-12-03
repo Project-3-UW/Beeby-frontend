@@ -22,6 +22,7 @@ export const useAuth = () => {
 
   const logout = async () => {
     setTokenToLocal("");
+    localStorage.removeItem("userId");
     setAuthenticated(false);
   };
 

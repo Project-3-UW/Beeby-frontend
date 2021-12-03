@@ -15,7 +15,6 @@ const SignIn = (props) => {
 
   const [token, setToken] = useState("")
 
-  const [userState, setUserState] = useState({})
 
   const handleLoginChange = (event) => {
     if (event.target.name === "email") {
@@ -37,7 +36,7 @@ const SignIn = (props) => {
     const res = API.login(loginFormState).then(res=>{
       setToken(res.data.token)
       console.log(token)
-      console.log(userState)
+      localStorage.setItem("userId", res.data.user.id)
       localStorage.setItem("token", res.data.token)
       navigate("/")
       window.location.reload(true);
