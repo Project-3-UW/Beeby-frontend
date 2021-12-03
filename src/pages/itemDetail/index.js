@@ -1,7 +1,8 @@
 import { Typography, Box, Button } from "@material-ui/core";
 import ItemCard from "../../components/itemCard";
 import styles from "./styles.module.css";
-import API from "../../utils/API"
+import API from "../../utils/API";
+import SendEmail from "../../utils/email";
 
 const ItemDetail = () => {
 
@@ -35,7 +36,10 @@ const ItemDetail = () => {
           <Typography variant="h4">Details</Typography>
           <ItemCard
             cardActionComponents={
-              <Button variant="contained">I want it!</Button>
+              <Button onClick={SendEmail} variant="contained" color="primary">
+                I want it!
+              </Button>
+          
             }
           />
         </Box>

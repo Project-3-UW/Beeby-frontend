@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./styles.module.css";
 
+
 const FileUploader = ({
   onFilesChange,
   multiple = false,
@@ -32,6 +33,8 @@ const FileUploader = ({
       })
     );
   };
+
+  
 
   const renderImages = () => {
     return filesSrc.map((image) => {
@@ -83,10 +86,6 @@ const FileUploader = ({
           id={fileInputId}
           type="file"
         />
-
-        <Button variant="outlined" component="span">
-          Upload
-        </Button>
       </label>
       {showImages && (
         <Box width="100%" display="flex" flexWrap="wrap">
