@@ -205,7 +205,10 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
               urlEndpoint={urlEndpoint} 
               authenticationEndpoint={authenticationEndpoint} >
               <IKUpload
-                fileName="test-upload.png"
+                fileName="item.jpg"
+                isPrivateFile={false}
+                useUniqueFileName={true}
+                folder={"/itemImg"}
                 onError={onError}
                 onSuccess={onSuccess}
               />

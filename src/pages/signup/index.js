@@ -17,7 +17,19 @@ import {
   import { useEffect, useState } from "react";
   import { signUp } from "./service/request";
   import { getLocation } from "../../utils/location";
-  
+  import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
+
+const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
+const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
+const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when deployed
+
+const onError = err => {
+  console.log("Error", err);
+};
+const onSuccess = res => {
+  console.log("Success", res);
+};
+
   const babyAgeRange = [
     "0-6m",
     "6-12m",
@@ -191,6 +203,19 @@ import {
               }
               label="Share Location"
             />
+            <IKContext 
+              publicKey={publicKey} 
+              urlEndpoint={urlEndpoint} 
+              authenticationEndpoint={authenticationEndpoint} >
+              <IKUpload
+                fileName="user.jpg"
+                isPrivateFile={false}
+                useUniqueFileName={true}
+                folder={"/userImg"}
+                onError={onError}
+                onSuccess={onSuccess}
+              />
+            </IKContext>
              {/* <FormControlLabel
               control={
                 <Switch
