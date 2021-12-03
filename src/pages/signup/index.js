@@ -99,9 +99,9 @@ const SignUp = () => {
         navigate("/signin");
       }, 1000);
     } catch (err) {
-      const errors = err.response.data.err.errors;
-      if (errors[0] && errors[0].message) {
-        alert.error(errors[0].message);
+      // const errors = err.response.data.err.errors;
+      if (err) {
+        console.log(err);
       }
       //alert.error(err.response.data);
     }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+
 export const TOKEN_NAME = "token";
 
 function getTokenFromLocal() {
@@ -17,12 +18,14 @@ export const useAuth = () => {
     if (newToken) {
       setTokenToLocal(newToken);
       setAuthenticated(true);
+      
     }
   };
 
   const logout = async () => {
     setTokenToLocal("");
     setAuthenticated(false);
+
   };
 
   useEffect(() => {
