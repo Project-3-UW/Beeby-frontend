@@ -33,6 +33,9 @@ export const API = {
     getUsers: () => {
         return axios.get(`${URL_PREFIX}/api/users`)
     },
+    getUserById: (id) => {
+        return axios.get(`${URL_PREFIX}/api/users/${id}`)
+    },
     // getItems:()=>{
     //     return axios.get(`${URL_PREFIX}/api/items`)
     // },

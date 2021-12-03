@@ -6,7 +6,7 @@ import SignUp from "./pages/signup";
 import styles from "./layout.module.css";
 import Header from "./components/header";
 import Profile from "./pages/profile";
-import EditItem from "./pages/editItem";
+import ProfileById from "./pages/profile/profileById";
 import Signout from "./pages/signout";
 import ItemDetail from "./pages/itemDetail";
 import Resources from "./pages/resources";
@@ -16,13 +16,16 @@ import API from "./utils/API"
 function App() {
   // eslint-disable-next-line
   const [userState, setUserState] = useState({})
+  const [userIdState, setUserIdState] = useState(0)
 
 // eslint-disable-next-line
   const [token, setToken] = useState("")
 
   useEffect(() => {
     const myToken = localStorage.getItem("token");
-    if(myToken){
+    const userId = localStorage.getItem("userId");
+    if(myToken && userId){
+      setUserIdState(userId)
       API.validateToken(myToken)
       .then(res => {
         console.log(res)
@@ -36,31 +39,16 @@ function App() {
       }).catch(err =>{
         console.log(err)
         localStorage.removeItem("token")
+        localStorage.removeItem("userId")
       })
     }
   },[])
-
-  const getItems = () =>{
-    //check if token valid, if so call api with token, otherwise 
-    //API also support to pass custom lon/lat data
-
-    if(token && token.length> 0) {//check if token valid
-      API.getItems(token, null)
-    } else {
-      //if user not logged in, prompt for current location
-      const cordinates = {
-        lon: 122, //replace with actual value if needed.
-        lat: 47 //replace with actual value if needed.
-      }
-      API.getItems(null, cordinates)
-    }
-  }
-
 
   const userLogout = () => {
     setUserState({email:"",id:0})
     setToken("")
     localStorage.removeItem("token")
+    localStorage.removeItem("userId")
   }
 
   return (
@@ -72,12 +60,13 @@ function App() {
         <div className={styles.content}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/items/:id" element={<ItemDetail />} />
+            <Route path="/items/:id" element={<ItemDetail user={userState} />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/coupons" element={<Coupons />} />
             <Route path="/explore" element={<Explore token={token}/>} />
 
-            <Route path="/profile" element={<Profile user={userState} />} />
+            <Route path="/profile/" element={<Profile />} />
+            <Route path="/profile/:id" element={<ProfileById />} />
             <Route path="/profile/items/:id" element={<ItemDetail />} />
             <Route path="/signup" element={<SignUp />}/>
             <Route path="/signin" element={<SignIn />} />
