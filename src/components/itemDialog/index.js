@@ -17,6 +17,19 @@ import {
 import { useState } from "react";
 import FileUploader from "../fileUploader";
 import styles from "./styles.module.css";
+import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
+
+const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
+const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
+const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when deployed
+
+const onError = err => {
+  console.log("Error", err);
+};
+const onSuccess = res => {
+  console.log("Success", res);
+};
+
 const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
   const [title, setTitle] = useState(item.title || "");
   const [description, setDescription] = useState(item.description || "");
@@ -187,6 +200,16 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
             <FormLabel component="legend" className={styles.formItem}>
             </FormLabel>
             <FileUploader onFilesChange={handleFilesChange} multiple={false} />
+            <IKContext 
+              publicKey={publicKey} 
+              urlEndpoint={urlEndpoint} 
+              authenticationEndpoint={authenticationEndpoint} >
+              <IKUpload
+                fileName="test-upload.png"
+                onError={onError}
+                onSuccess={onSuccess}
+              />
+            </IKContext>
           </FormControl>
         </Box>
       </DialogContent>
