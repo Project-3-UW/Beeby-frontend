@@ -13,6 +13,7 @@ import {
   DialogActions,
   Button,
   Box,
+  imageListItemBarClasses,
 } from "@material-ui/core";
 import { useState } from "react";
 import FileUploader from "../fileUploader";
@@ -23,12 +24,6 @@ const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
 const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
 const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when deployed
 
-const onError = err => {
-  console.log("Error", err);
-};
-const onSuccess = res => {
-  console.log("Success", res);
-};
 
 const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
   const [title, setTitle] = useState(item.title || "");
@@ -39,6 +34,17 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
   const [model, setModel] = useState(item.model || "");
   const [ageRange, setAgeRange] = useState(item.ageRange || "");
   const [status, setStatus] = useState(item.status || "");
+  const [imgItem, setImgItem] = useState([])
+  
+  const onError = err => {
+    console.log("Error", err);
+  };
+
+  const onSuccess = res => {
+    console.log("Success", res)
+    setImgItem([...imgItem, res.url])
+
+  };
 
   const handleFilesChange = (files) => {
     console.log(files);
@@ -54,7 +60,9 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
       model,
       ageRange,
       status,
+      imgItem
     });
+    //empty states to stop info dup.
   };
 
   return (

@@ -22,14 +22,6 @@ import {
 const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
 const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
 const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when deployed
-
-const onError = err => {
-  console.log("Error", err);
-};
-const onSuccess = res => {
-  console.log("Success", res);
-};
-
   const babyAgeRange = [
     "0-6m",
     "6-12m",
@@ -55,9 +47,17 @@ const onSuccess = res => {
     const [position, setPosition] = useState([]);
     const [allowLocation, setAllowLocation] = useState(true);
     const [bio, setBio] = useState("")
+    const [userImg, setImgUser] = useState("")
     // const [allowNotication, setAllowNotication] = useState(true);
   
-  
+    const onError = err => {
+      console.log("Error", err);
+    };
+    const onSuccess = res => {
+      console.log("Success", res)
+      setImgUser(...userImg, res.url)
+    };
+
     useEffect(() => {
       if (allowLocation) {
         getLocation()
@@ -104,7 +104,8 @@ const onSuccess = res => {
           email,
           password,
           position[0],
-          position[1]
+          position[1],
+          userImg
         );
         alert.success("Success to sign up!!");
         setTimeout(() => {
