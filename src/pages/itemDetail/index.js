@@ -4,10 +4,13 @@ import styles from "./styles.module.css";
 import API from "../../utils/API";
 import SendEmail from "../../utils/email";
 
+
+
 const ItemDetail = () => {
-
+ 
   //use API.getItemById(id) to retrieve item detail
-
+  
+ 
   const images = [
     "https://images.unsplash.com/photo-1533827432537-70133748f5c8?w=242&h=121&fit=crop&auto=format",
     "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=242&h=242&fit=crop&auto=format",
@@ -17,31 +20,32 @@ const ItemDetail = () => {
     return images.map((image) => {
       return (
         <img
-          src={image}
-          key={image}
-          alt=""
-          className={styles.itemImage}
-          loading="lazy"
+        src={image}
+        key={image}
+        alt=""
+        className={styles.itemImage}
+        loading="lazy"
         />
-      );
-    });
-  };
-  return (
-    <div className={styles.wrapper}>
+        );
+      });
+    };
+    return (
+      <div className={styles.wrapper}>
       <Typography variant="h3" textAlign="center" component="h1">
         Item Details
       </Typography>
       <Box width="100%" gap="100px">
         <Box>
           <Typography variant="h4">Details</Typography>
+        
           <ItemCard
             cardActionComponents={
               <Button onClick={SendEmail} variant="contained" color="primary">
                 I want it!
               </Button>
           
-            }
-          />
+        }
+        />
         </Box>
         <Box width="100%">
           <Typography variant="h4">Photos</Typography>

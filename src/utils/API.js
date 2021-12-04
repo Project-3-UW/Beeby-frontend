@@ -27,9 +27,36 @@ export const API = {
     getItemById: (id) => {
         return axios.get(`${URL_PREFIX}/api/items/${id}`)
     },
-    sendEmailBack: () => {
-        return axios.get(`${URL_PREFIX}/api/email/1`)
+    sendEmailBack: (token, res) => {
+        return axios.get(`${URL_PREFIX}/api/email/1`,
+
+        console.log(res)
+        ,{
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+        )
     },
+    // sendEmailBack(id) {
+    //     axios({
+    //         method: 'GET',
+      
+    //         //1 would be the id of the object
+    //         url: `${URL_PREFIX}/api/email/` + id,
+      
+    //         headers: {
+    //           'Content-type': 'application/json'
+    //         },
+    //       })
+    //       .then(response => {
+    //         this.response = response.data.id
+    //         // this.test = response.data.map(currency => currency.id)
+    //         console.log(response.data.id)
+      
+    //         console.log(this.response)
+    //       })
+    //   },
     getUsers: () => {
         return axios.get(`${URL_PREFIX}/api/users`)
     },

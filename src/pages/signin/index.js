@@ -14,6 +14,7 @@ const SignIn = (props) => {
   });
 
   const [token, setToken] = useState("")
+  const [email, setEmail] = useState("")
 
   const [userState, setUserState] = useState({})
 
@@ -36,9 +37,14 @@ const SignIn = (props) => {
     console.log(loginFormState)
     const res = API.login(loginFormState).then(res=>{
       setToken(res.data.token)
+      setEmail(res.data.email)
       console.log(token)
       console.log(userState)
       localStorage.setItem("token", res.data.token)
+      localStorage.setItem("email", loginFormState.email)
+      const contact = localStorage.setItem("email", loginFormState.email)
+
+      
       navigate("/")
       window.location.reload(true);
     }).catch((err) => {
