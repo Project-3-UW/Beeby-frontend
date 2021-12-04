@@ -16,7 +16,6 @@ const SignIn = (props) => {
   const [token, setToken] = useState("")
   const [email, setEmail] = useState("")
 
-  const [userState, setUserState] = useState({})
 
   const handleLoginChange = (event) => {
     if (event.target.name === "email") {
@@ -39,7 +38,7 @@ const SignIn = (props) => {
       setToken(res.data.token)
       setEmail(res.data.email)
       console.log(token)
-      console.log(userState)
+      localStorage.setItem("userId", res.data.user.id)
       localStorage.setItem("token", res.data.token)
       localStorage.setItem("email", loginFormState.email)
       const contact = localStorage.setItem("email", loginFormState.email)
