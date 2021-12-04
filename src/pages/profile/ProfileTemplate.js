@@ -1,4 +1,4 @@
-import { Typography, Box, Button } from "@material-ui/core";
+import { Typography, Box, Button, CardContent, Card, Switch, FormControl, FormControlLabel } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom'
 import { Link, useNavigate } from "react-router-dom";
@@ -12,9 +12,13 @@ import API from "../../utils/API"
 
 const ProfileTemplate = () => {
   const userIdLocal = localStorage.getItem("userId");
+
   const [userState, setUserState] = useState({
     name: "",
+    lastName: "",
     bio: "",
+    createdAt: "",
+    userImg: "",
     activeList: [],
     pendingList: [],
     giftedList: [],
@@ -45,9 +49,18 @@ const ProfileTemplate = () => {
     console.log("calling getuserbyid for id" + currentProfileUserId)
     API.getUserById(currentProfileUserId).then(res => {
       console.log(res)
+      let profileImg = ""
+      if(res.data.findUser.UserImg){
+        profileImg = res.data.findUser.UserImg.url
+      }
+      console.log(profileImg)
       setUserState({
+        // profileImg: res.data.findUser.Img,
         name: res.data.findUser.firstName,
+        userImg: profileImg,
+        lastName: res.data.findUser.lastName,
         bio: res.data.findUser.bio,
+        createdAt: res.data.findUser.createdAt,
         activeList: res.data.activeList,
         pendingList: res.data.pendingList,
         giftedList: res.data.giftedList,
@@ -75,15 +88,47 @@ const ProfileTemplate = () => {
       ) : (
         <div></div>
       )}
+
       <Box width="100%" marginTop="30px">
-        <UserInfo />
-        {userState.name}
+
+        <Card className={styles.itemWrapper} sx={{ width: "100%" }}>
+          <CardContent>
+            <Typography variant="h6" color="text.secondary">
+                <img
+                  src={userState.userImg}
+                  key={userState.userImg}
+                  alt={userState.name}
+                  className={styles.itemImage}
+                  loading="lazy"
+                />
+              </Typography>
+            <Typography variant="h6" color="text.secondary">
+              Name: {userState.name} {userState.lastName}
+            </Typography>
+            <Typography variant="h6" color="text.secondary">
+              Join Beeby since: {userState.createdAt}
+            </Typography>
+            <Typography variant="h6" color="text.secondary">
+              About me: {userState.bio}
+            </Typography>
+            {/* <Typography variant="h6" color="text.secondary">
+              <FormControl>
+                Share: <FormControlLabel control={<Switch />} label="Location" />
+              </FormControl>
+            </Typography> */}
+          </CardContent>
+        </Card>
+
       </Box>
+
+      {isSelfState? (
       <Box width="100%" marginTop="20px">
         <Button variant="contained" onClick={handleClickAdd}>
           Add An Item
         </Button>
-      </Box>
+      </Box>):(
+        <div></div>
+      )}
 
       {userState.activeList.length > 0 ? (
         <Box width="100%" marginTop="20px">

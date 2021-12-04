@@ -17,16 +17,7 @@ import {
   import { useEffect, useState } from "react";
   import { signUp } from "./service/request";
   import { getLocation } from "../../utils/location";
-  
-  const babyAgeRange = [
-    "0-6m",
-    "6-12m",
-    "12-18m",
-    "18-24m",
-    "2-3 years",
-    "3-4 years",
-    "4 years and up",
-  ];
+  import { API } from "../../utils/API"
   
   const SignUp = () => {
     const navigate = useNavigate();
@@ -43,9 +34,7 @@ import {
     const [position, setPosition] = useState([]);
     const [allowLocation, setAllowLocation] = useState(true);
     const [bio, setBio] = useState("")
-    // const [allowNotication, setAllowNotication] = useState(true);
-  
-  
+    
     useEffect(() => {
       if (allowLocation) {
         getLocation()
@@ -62,16 +51,6 @@ import {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [allowLocation]);
   
-    const renderBabyRange = () => {
-      return babyAgeRange.map((range) => {
-        return (
-          <MenuItem value={range} key={range}>
-            {range}
-          </MenuItem>
-        );
-      });
-    };
-  
     const handleSubmit = async () => {
       if (!firstname || !lastname || !email || !password) {
         alert.error("Please enter all fields!");
@@ -86,7 +65,7 @@ import {
         return;
       }
       try {
-        await signUp(
+        await API.signup(
           firstname,
           lastname,
           email,
@@ -99,10 +78,11 @@ import {
           navigate("/signin");
         }, 1000);
       } catch (err) {
-        const errors = err.response.data.err.errors;
-        if (errors[0] && errors[0].message) {
-          alert.error(errors[0].message);
-        }
+        // const errors = err.response.data.err.errors;
+        console.log(err)
+        // if (errors[0] && errors[0].message) {
+        //   alert.error(errors[0].message);
+        // }
         //alert.error(err.response.data);
       }
     };
@@ -143,19 +123,6 @@ import {
           />
         </Box>
         <Box width="400px" marginTop="20px">
-          <FormControl fullWidth>
-            <InputLabel id="age-range">Age Range</InputLabel>
-            <Select
-              labelId="age-range"
-              label="Baby Age"
-              value={babyAge}
-              onChange={(e) => setBabyAge(e.target.value)}
-            >
-              {renderBabyRange()}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box width="400px" marginTop="20px">
           <TextField
             fullWidth
             label="Password"
@@ -175,10 +142,19 @@ import {
             variant="outlined"
           />
         </Box>
-        <Box width="400px" marginTop="10px" display="flex" gap="10px">
-          <Typography variant="body2">Already has Account?</Typography>
-          <Link to="/signin">Login</Link>
+        <Box width="400px" marginTop="20px">
+          <TextField
+            fullWidth
+            label="Bio"
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            variant="outlined"
+            multiline
+            rows={2}
+            rowsMax={4}
+          />
         </Box>
+
         <Box width="400px" marginTop="20px">
           <FormGroup>
             <FormControlLabel
@@ -191,18 +167,14 @@ import {
               }
               label="Share Location"
             />
-             {/* <FormControlLabel
-              control={
-                <Switch
-                  defaultChecked={true}
-                  value={allowNotication}
-                  onChange={(e) => setAllowNotication(e.target.checked)}
-                />
-              }
-              label="Open Notication"
-            /> */}
           </FormGroup>
         </Box>
+        
+        <Box width="400px" marginTop="10px" display="flex" gap="10px">
+          <Typography variant="body2">Already has Account?</Typography>
+          <Link to="/signin">Login</Link>
+        </Box>
+
         <Box width="400px" marginTop="40px">
           <Button onClick={handleSubmit} variant="contained">
             Submit
