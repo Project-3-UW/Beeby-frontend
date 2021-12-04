@@ -11,8 +11,21 @@ export const API = {
     login: (loginFormState) => {
         return axios.post(`${URL_PREFIX}/api/users/login`, loginFormState)
     },
-    signup: (signUpFormState) => {
-        return axios.post(`${URL_PREFIX}/api/users/signup`, signUpFormState)
+    signup: (
+        firstName,
+        lastName,
+        email,
+        password,
+        latitude,
+        longitude) => {
+        return axios.post(`${URL_PREFIX}/api/users/signup`, {
+            firstName,
+            lastName,
+            email,
+            password,
+            latitude,
+            longitude,
+          });
     },
     getItems: () => {
         return axios.get(`${URL_PREFIX}/api/items`)
@@ -33,6 +46,16 @@ export const API = {
     getUsers: () => {
         return axios.get(`${URL_PREFIX}/api/users`)
     },
+    getUserById: (id) => {
+        return axios.get(`${URL_PREFIX}/api/users/${id}`)
+    },
+    updateItemStatus: (id, newStatus, token)=>{
+        return axios.put(`${URL_PREFIX}/api/items/${newStatus}/${id}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+    }
     // getItems:()=>{
     //     return axios.get(`${URL_PREFIX}/api/items`)
     // },

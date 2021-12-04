@@ -4,8 +4,6 @@ import Querier from "./components/querier";
 import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 import { useAlert } from "react-alert";
-import { Button, Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import API from "../../utils/API"
 
 const Explore = (props) => {
@@ -15,13 +13,12 @@ const Explore = (props) => {
 
   useEffect(() => {
     API.getItems(props.token, null).then(items=>{
-      console.log(items.data)
+      // console.log(items.data)
       setLatestItems(items.data);
     })
   }, []);
   
   return (
-    
     <div className={styles.wrapper}>
       <Box height="100%">
         <Querier />
