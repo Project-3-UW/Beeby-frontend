@@ -17,7 +17,21 @@ import {
   import { useEffect, useState } from "react";
   import { signUp } from "./service/request";
   import { getLocation } from "../../utils/location";
+  import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
   import { API } from "../../utils/API"
+
+const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
+const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
+const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when deployed
+  const babyAgeRange = [
+    "0-6m",
+    "6-12m",
+    "12-18m",
+    "18-24m",
+    "2-3 years",
+    "3-4 years",
+    "4 years and up",
+  ];
   
   const SignUp = () => {
     const navigate = useNavigate();
@@ -34,7 +48,17 @@ import {
     const [position, setPosition] = useState([]);
     const [allowLocation, setAllowLocation] = useState(true);
     const [bio, setBio] = useState("")
-    
+    const [userImg, setImgUser] = useState("")
+    // const [allowNotication, setAllowNotication] = useState(true);
+  
+    const onError = err => {
+      console.log("Error", err);
+    };
+    const onSuccess = res => {
+      console.log("Success", res)
+      setImgUser(...userImg, res.url)
+    };
+
     useEffect(() => {
       if (allowLocation) {
         getLocation()
@@ -71,7 +95,8 @@ import {
           email,
           password,
           position[0],
-          position[1]
+          position[1],
+          userImg
         );
         alert.success("Success to sign up!!");
         setTimeout(() => {
@@ -167,6 +192,29 @@ import {
               }
               label="Share Location"
             />
+            <IKContext 
+              publicKey={publicKey} 
+              urlEndpoint={urlEndpoint} 
+              authenticationEndpoint={authenticationEndpoint} >
+              <IKUpload
+                fileName="user.jpg"
+                isPrivateFile={false}
+                useUniqueFileName={true}
+                folder={"/userImg"}
+                onError={onError}
+                onSuccess={onSuccess}
+              />
+            </IKContext>
+             {/* <FormControlLabel
+              control={
+                <Switch
+                  defaultChecked={true}
+                  value={allowNotication}
+                  onChange={(e) => setAllowNotication(e.target.checked)}
+                />
+              }
+              label="Open Notication"
+            /> */}
           </FormGroup>
         </Box>
         
