@@ -23,6 +23,7 @@ import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
 const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
 const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
 const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when deployed
+// const authenticationEndpoint = 'https://beeby-backend.herokuapp.com/'; //TODO: change when deployed
 
 
 const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {

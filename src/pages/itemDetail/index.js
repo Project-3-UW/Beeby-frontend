@@ -1,20 +1,30 @@
-import ItemCard from "../../components/itemCard";
-import { useParams, Link  } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import styles from "./styles.module.css";
 import React, { useEffect, useState } from "react";
 import API from "../../utils/API"
 import {
   Card,
-  CardMedia,
   CardContent,
   Typography,
   CardActions,
   Badge,
-  Box, Button
+  Box,
+  FormControl,
+  FormLabel,
+  Select,
+  MenuItem,
+  Button,
 } from "@material-ui/core";
 
 
 const ItemDetail = ({ user }) => {
+  const userIdLocal = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
+  // user.email is avaible from props like so console.log(user.email) 
+
+  const [isSelfState, setIsSelfState] = useState(false)
+
   const { id } = useParams()
 
   const [itemState, setItemState] = useState({
@@ -26,6 +36,7 @@ const ItemDetail = ({ user }) => {
     brand: "",
     model: "",
     condition: "",
+    status: "",
     ageRange: "",
     createdAt: "",
     User: {
@@ -37,6 +48,8 @@ const ItemDetail = ({ user }) => {
       }
     }
   })
+
+  const [status, setStatus] = useState(itemState.status || "");
 
   useEffect(() => {
     API.getItemById(id).then(res => {
@@ -52,14 +65,32 @@ const ItemDetail = ({ user }) => {
         />
       })
       itemStateData.itemImagesData = updatedItemImages;
+      if (!res.data.status || res.data.status.length === 0) {
+        itemStateData.status = "available"
+      }
+
+      if (userIdLocal) {
+        setIsSelfState(userIdLocal == res.data.UserId)
+      }
+      setStatus(itemStateData.status)
       setItemState(itemStateData);
     })
 
   }, [])
 
+  const handleUpdateStatus = (e) => {
+    // console.log(e.target.value);
+    setStatus(e.target.value);
+    //call API to update item status in database
+    API.updateItemStatus(itemState.id, e.target.value, token).then(res => {
+      //alert
+      setStatus(e.target.value);
+    })
+  }
+
   return (
     <div className={styles.wrapper}>
-      <Badge badgeContent={"Available"} color="secondary">
+      <Badge badgeContent={status} color="secondary">
         <Typography variant="h3" textAlign="center" component="h1">
           {itemState.title}
         </Typography>
@@ -96,19 +127,38 @@ const ItemDetail = ({ user }) => {
               <Typography variant="h6" color="text.secondary">
                 Item Posted: {itemState.createdAt}
               </Typography>
-              <Link to={"/profile/" + itemState.User.id}>
-              <Typography variant="h6" color="text.secondary">
-                Posted By: {itemState.User.firstName} {itemState.User.lastName}
-                <img
-                  src={itemState.User.UserImg.url}
-                  key={itemState.User.UserImg.id}
-                  alt={itemState.title}
-                  className={styles.itemImage}
-                  loading="lazy"
-                />
-              </Typography>
-              </Link>
-              <CardActions><Button variant="contained">I want it!</Button></CardActions>
+
+              {isSelfState ? (
+                <FormControl component="fieldset" className={styles.formControl}>
+                  <FormLabel component="legend" className={styles.formItem}>
+                    Item Status
+                  </FormLabel>
+                  <Select
+                    size="small"
+                    value={status}
+                    onChange={handleUpdateStatus}
+                  >
+                    <MenuItem value={`available`}>Available</MenuItem>
+                    <MenuItem value={`pending`}>Pending</MenuItem>
+                    <MenuItem value={`gifted`}>Gifted</MenuItem>
+                  </Select>
+                </FormControl>
+              ) : (
+                <>
+                <Link to={"/profile/" + itemState.User.id}>
+                  <Typography variant="h6" color="text.secondary">
+                    Posted By: {itemState.User.firstName} {itemState.User.lastName}
+                    <img
+                      src={itemState.User.UserImg.url}
+                      key={itemState.User.UserImg.id}
+                      alt={itemState.title}
+                      className={styles.itemImage}
+                      loading="lazy" />
+                  </Typography>
+
+                </Link><CardActions><Button variant="contained">I want it!</Button></CardActions>
+                </>
+              )}
             </CardContent>
           </Card>
         </Box>

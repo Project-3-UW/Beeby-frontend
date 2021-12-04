@@ -18,6 +18,7 @@ import {
   import { signUp } from "./service/request";
   import { getLocation } from "../../utils/location";
   import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
+  import { API } from "../../utils/API"
 
 const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
 const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
@@ -74,16 +75,6 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [allowLocation]);
   
-    const renderBabyRange = () => {
-      return babyAgeRange.map((range) => {
-        return (
-          <MenuItem value={range} key={range}>
-            {range}
-          </MenuItem>
-        );
-      });
-    };
-  
     const handleSubmit = async () => {
       if (!firstname || !lastname || !email || !password) {
         alert.error("Please enter all fields!");
@@ -98,7 +89,7 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
         return;
       }
       try {
-        await signUp(
+        await API.signup(
           firstname,
           lastname,
           email,
@@ -112,10 +103,11 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
           navigate("/signin");
         }, 1000);
       } catch (err) {
-        const errors = err.response.data.err.errors;
-        if (errors[0] && errors[0].message) {
-          alert.error(errors[0].message);
-        }
+        // const errors = err.response.data.err.errors;
+        console.log(err)
+        // if (errors[0] && errors[0].message) {
+        //   alert.error(errors[0].message);
+        // }
         //alert.error(err.response.data);
       }
     };
@@ -156,19 +148,6 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
           />
         </Box>
         <Box width="400px" marginTop="20px">
-          <FormControl fullWidth>
-            <InputLabel id="age-range">Age Range</InputLabel>
-            <Select
-              labelId="age-range"
-              label="Baby Age"
-              value={babyAge}
-              onChange={(e) => setBabyAge(e.target.value)}
-            >
-              {renderBabyRange()}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box width="400px" marginTop="20px">
           <TextField
             fullWidth
             label="Password"
@@ -188,10 +167,19 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
             variant="outlined"
           />
         </Box>
-        <Box width="400px" marginTop="10px" display="flex" gap="10px">
-          <Typography variant="body2">Already has Account?</Typography>
-          <Link to="/signin">Login</Link>
+        <Box width="400px" marginTop="20px">
+          <TextField
+            fullWidth
+            label="Bio"
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            variant="outlined"
+            multiline
+            rows={2}
+            rowsMax={4}
+          />
         </Box>
+
         <Box width="400px" marginTop="20px">
           <FormGroup>
             <FormControlLabel
@@ -229,6 +217,12 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
             /> */}
           </FormGroup>
         </Box>
+        
+        <Box width="400px" marginTop="10px" display="flex" gap="10px">
+          <Typography variant="body2">Already has Account?</Typography>
+          <Link to="/signin">Login</Link>
+        </Box>
+
         <Box width="400px" marginTop="40px">
           <Button onClick={handleSubmit} variant="contained">
             Submit
