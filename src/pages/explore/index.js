@@ -8,16 +8,25 @@ import API from "../../utils/API"
 
 const Explore = (props) => {
   const alert = useAlert();
-
+  
   const [latestItems, setLatestItems] = useState([]);
-
+  const [category, setCategory] = useState([]);
+  
   useEffect(() => {
     API.getItems(props.token, null).then(items=>{
-      // console.log(items.data)
       setLatestItems(items.data);
-    })
-  }, []);
-  
+      for (let i = 0; i < items.data.length; i++) {
+      //  console.log(items.data[i].category)
+       console.log(items.data[i].category);
+      
+        
+      
+      // console.log(items.data)
+      
+    }
+  })}, [])
+  // console.log(latestItems.data)
+  // console.log("----props--" + latestItems.category)
   return (
     <div className={styles.wrapper}>
       <Box height="100%">
