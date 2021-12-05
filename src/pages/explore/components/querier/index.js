@@ -1,7 +1,7 @@
 import { FormControl, MenuItem, Select, Typography } from "@material-ui/core";
 import { useState } from "react";
 import styles from "./styles.module.css";
-const Querier = () => {
+const Querier = ({changeQueryHandler}) => {
   const [queriersConfigs, setQueriersConfigs] = useState([
     {
       label: "Distance",
@@ -10,10 +10,10 @@ const Querier = () => {
       value: "",
       options: [
         { value: "", label: "Show all" },
-        { value: "5-10 miles", label: "5-10 miles" },
-        { value: "10-15 miles", label: "10-15 miles" },
-        { value: "15-20 miles", label: "15-20 miles" },
-        { value: ">20 miles", label: ">20 miles" },
+        { value: "5", label: "less than 5 miles" },
+        { value: "10", label: "less than 10 miles" },
+        { value: "15", label: "less than 15 miles" },
+        { value: "20", label: "less than 20 miles" }
       ],
     },
     {
@@ -125,6 +125,7 @@ const Querier = () => {
         return querierConfig;
       })
     );
+    changeQueryHandler(key,value)
   };
 
   const renderQueriers = () => {
