@@ -46,7 +46,7 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
     const [password, setPassword] = useState("");
     const [confirmedPassword, setConfirmedPassword] = useState("");
     const [position, setPosition] = useState([]);
-    const [allowLocation, setAllowLocation] = useState(true);
+    const [allowLocation, setAllowLocation] = useState(false);
     const [bio, setBio] = useState("")
     const [userImg, setImgUser] = useState("")
     // const [allowNotication, setAllowNotication] = useState(true);
@@ -64,7 +64,6 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
         getLocation()
           .then((pos) => {
             setPosition(pos);
-            console.log(pos);
           })
           .catch((err) => {
             alert.error(err);
@@ -76,6 +75,7 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
     }, [allowLocation]);
   
     const handleSubmit = async () => {
+      console.log(userImg)
       if (!firstname || !lastname || !email || !password) {
         alert.error("Please enter all fields!");
         return;
@@ -96,6 +96,7 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
           password,
           position[0],
           position[1],
+          bio,
           userImg
         );
         alert.success("Success to sign up!!");
@@ -185,8 +186,8 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
             <FormControlLabel
               control={
                 <Switch
-                  defaultChecked={true}
-                  value={allowLocation}
+                  defaultChecked={false}
+                  value={allowLocation} // add description to show why they need to share location
                   onChange={(e) => setAllowLocation(e.target.checked)}
                 />
               }
@@ -205,16 +206,6 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
                 onSuccess={onSuccess}
               />
             </IKContext>
-             {/* <FormControlLabel
-              control={
-                <Switch
-                  defaultChecked={true}
-                  value={allowNotication}
-                  onChange={(e) => setAllowNotication(e.target.checked)}
-                />
-              }
-              label="Open Notication"
-            /> */}
           </FormGroup>
         </Box>
         

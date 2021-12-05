@@ -72,8 +72,31 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
+      
       <DialogTitle id="alert-dialog-title">New Item</DialogTitle>
       <DialogContent className={styles.forms}>
+      <Box width="600px">
+      <div>add pictures for your item:</div>
+          <FormControl component="fieldset" className={styles.formControl}>
+            <FormLabel component="legend" className={styles.formItem}>
+            </FormLabel>
+            <FileUploader onFilesChange={handleFilesChange} multiple={false} />
+            <IKContext 
+              publicKey={publicKey} 
+              urlEndpoint={urlEndpoint} 
+              authenticationEndpoint={authenticationEndpoint} >
+              <IKUpload
+                fileName="item.jpg"
+                isPrivateFile={false}
+                useUniqueFileName={true}
+                folder={"/itemImg"}
+                onError={onError}
+                onSuccess={onSuccess}
+              />
+            </IKContext>
+          </FormControl>
+        </Box>
+
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">Title</FormLabel>
           <TextField
@@ -203,27 +226,6 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
             />
           </RadioGroup>
         </FormControl>
-
-        <Box width="600px">
-          <FormControl component="fieldset" className={styles.formControl}>
-            <FormLabel component="legend" className={styles.formItem}>
-            </FormLabel>
-            <FileUploader onFilesChange={handleFilesChange} multiple={false} />
-            <IKContext 
-              publicKey={publicKey} 
-              urlEndpoint={urlEndpoint} 
-              authenticationEndpoint={authenticationEndpoint} >
-              <IKUpload
-                fileName="item.jpg"
-                isPrivateFile={false}
-                useUniqueFileName={true}
-                folder={"/itemImg"}
-                onError={onError}
-                onSuccess={onSuccess}
-              />
-            </IKContext>
-          </FormControl>
-        </Box>
       </DialogContent>
       <DialogActions>
         <Button variant="contained" color="inherit" onClick={onCancel}>
