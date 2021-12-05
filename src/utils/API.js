@@ -75,6 +75,7 @@ export const API = {
     },
     getUserById: (id) => {
         return axios.get(`${URL_PREFIX}/api/users/${id}`)
+          
     },
     updateItemStatus: (id, newStatus, token)=>{
         return axios.put(`${URL_PREFIX}/api/items/${newStatus}/${id}`, {
@@ -82,7 +83,11 @@ export const API = {
                 "Authorization": `Bearer ${token}`
             }
         });
-    }
+    },
+    getLocation: (id) => {
+        return axios.get(`${URL_PREFIX}/api/users/${id}/location`)
+          
+    },
     // getItems:()=>{
     //     return axios.get(`${URL_PREFIX}/api/items`)
     // },

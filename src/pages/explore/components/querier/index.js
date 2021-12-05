@@ -1,7 +1,9 @@
-import { FormControl, MenuItem, Select, Typography } from "@material-ui/core";
+import { FormControl, MenuItem, Select, Typography, Button} from "@material-ui/core";
 import { useState } from "react";
+import GetDistance from "../../../../utils/distance";
 import styles from "./styles.module.css";
 const Querier = () => {
+ 
   const [queriersConfigs, setQueriersConfigs] = useState([
     {
       label: "Distance",
@@ -131,6 +133,7 @@ const Querier = () => {
     return queriersConfigs.map((querierConfig) => {
       return (
         <div className={styles.queryKey} key={querierConfig.key}>
+          <Button onClick={GetDistance}type="button">Click me for distance</Button>
           <Typography variant="h6" component="div">
             {querierConfig.label}
           </Typography>
