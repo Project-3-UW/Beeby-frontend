@@ -1,11 +1,10 @@
 import axios from "axios";
-require('dotenv').config();
 
-
-const URL_PREFIX = "http://localhost:3001"
+// const URL_PREFIX = "http://localhost:3001"
 // delploy
-// const URL_PREFIX = "https://beeby-backend.herokuapp.com"
+const URL_PREFIX = "https://beeby-backend.herokuapp.com"
 
+const token = localStorage.getItem("token");
 
 export const API = {
     login: (loginFormState) => {
@@ -30,7 +29,7 @@ export const API = {
     getItems: () => {
         return axios.get(`${URL_PREFIX}/api/items`)
     },
-    validateToken: (token) => {
+    validateToken: () => {
         return axios.get(`${URL_PREFIX}/api/query/validateToken`, {
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -49,7 +48,14 @@ export const API = {
     getUserById: (id) => {
         return axios.get(`${URL_PREFIX}/api/users/${id}`)
     },
-    updateItemStatus: (id, newStatus, token)=>{
+    getUserLocation: (id) => {
+        return axios.get(`${URL_PREFIX}/api/users/${id}/location`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+    },
+    updateItemStatus: (id, newStatus)=>{
         return axios.put(`${URL_PREFIX}/api/items/${newStatus}/${id}`, {
             headers: {
                 "Authorization": `Bearer ${token}`

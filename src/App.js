@@ -16,7 +16,6 @@ import API from "./utils/API"
 function App() {
   // eslint-disable-next-line
   const [userState, setUserState] = useState({})
-  const [userIdState, setUserIdState] = useState(0)
 
 // eslint-disable-next-line
   const [token, setToken] = useState("")
@@ -25,8 +24,7 @@ function App() {
     const myToken = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
     if(myToken && userId){
-      setUserIdState(userId)
-      API.validateToken(myToken)
+      API.validateToken()
       .then(res => {
         console.log(res)
         setToken(myToken)
