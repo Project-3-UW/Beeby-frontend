@@ -21,8 +21,6 @@ const ItemDetail = ({ user }) => {
   const userIdLocal = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  // user.email is avaible from props like so console.log(user.email) 
-
   const [isSelfState, setIsSelfState] = useState(false)
 
   const { id } = useParams()
@@ -156,7 +154,7 @@ const ItemDetail = ({ user }) => {
                       loading="lazy" />
                   </Typography>
 
-                </Link><CardActions><Button variant="contained">I want it!</Button></CardActions>
+                </Link><CardActions><Button variant="contained"><a href={`mailto:${itemState.User.email}`}>I want it!</a></Button></CardActions>
                 </>
               )}
             </CardContent>
