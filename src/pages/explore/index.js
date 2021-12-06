@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useAlert } from "react-alert";
 import API from "../../utils/API"
 import calculateDistance from "../../utils/distanceUtil"
+import { Grid } from "@material-ui/core";
 
 const Explore = (props) => {
 
@@ -88,14 +89,16 @@ const Explore = (props) => {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
-      <Box height="100%">
+  <Grid container spacing={2} display="flex" justifyContent="center">
+      <Grid item xs={12} md={3} lg={3}>
+        <Box width="100%">
         <Querier changeQueryHandler={handleFilterOptionChange} />
-      </Box>
-      <Box height="100%" width="50%">
-      <Items items={filteredItems} />
-      </Box>
-    </div>
+        </Box>
+        </Grid>
+      <Grid item xs={12} lg={6}>
+      <Items items={latestItems} />
+      </Grid>
+    </Grid>
   );
 };
 

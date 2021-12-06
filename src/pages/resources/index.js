@@ -1,7 +1,6 @@
 import ResourceItem from "./components/resourceItem";
 import styles from "./styles.module.css";
-import { Box } from "@material-ui/system";
-import { Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 const Resources = () => {
   const resources = [
     {
@@ -58,25 +57,36 @@ const Resources = () => {
       const renderLinks = () => {
         return resource.links.map((item) => {
           return (
-            <div className={styles.resourceBox} key={item.name}>
+            <Grid
+              item
+              xs={12}
+              lg={4}
+              key={item.name}
+              style={{ height: "40vh" }}
+              className={styles.linkItemBox}
+            >
               <ResourceItem name={item.name} link={item.link} />
-            </div>
+            </Grid>
           );
         });
       };
       return (
-        <Box width="100%" key={resource.type} marginBottom="30px">
+        <Grid item key={resource.type} xs={12} lg={12}>
           <Typography variant="h5" component="div">
             {resource.title}
           </Typography>
-          <Box display="flex" flexWrap="wrap">
+          <Grid container spacing={1}>
             {renderLinks()}
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       );
     });
   };
-  return <div className={styles.wrapper}>{renderResouces()}</div>;
+  return (
+  <Grid container spacing={2}>
+  {renderResouces()}
+</Grid>
+  );
 };
 
 export default Resources;

@@ -14,6 +14,8 @@ import {
   Select,
   MenuItem,
   Button,
+  Avatar,
+  Grid
 } from "@material-ui/core";
 
 
@@ -88,11 +90,13 @@ const ItemDetail = ({ user }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Badge badgeContent={status} color="secondary">
-        <Typography variant="h3" textAlign="center" component="h1">
+        <Typography variant="h3" textAlign="center" component="h1" className={styles.title}>
           {itemState.title}
-        </Typography>
+        </Typography> 
+        <Grid>    
+         <Badge badgeContent={status} color="secondary" className={styles.badge}>
       </Badge>
+      </Grid>
       <Box width="100%">
         {/* <Typography variant="h4">Photos</Typography> */}
         <Box width="100%" display="flex" flexWrap="wrap">
@@ -144,14 +148,21 @@ const ItemDetail = ({ user }) => {
               ) : (
                 <>
                 <Link to={"/profile/" + itemState.User.id}>
-                  <Typography variant="h6" color="text.secondary">
-                    Posted By: {itemState.User.firstName} {itemState.User.lastName}
-                    <img
-                      src={itemState.User.UserImg.url}
-                      key={itemState.User.UserImg.id}
-                      alt={itemState.title}
-                      className={styles.itemImage}
-                      loading="lazy" />
+                <Typography
+                      variant="h6"
+                      display="flex"
+                      color="text.secondary"
+                    >
+                      <span>Posted By:</span>
+                      <Avatar
+                        style={{ marginLeft: "15px", marginRight: "15px" }}
+                        src={itemState.User.UserImg.url}
+                        key={itemState.User.UserImg.id}
+                        alt={itemState.title}
+                        loading="lazy" />
+                      <span>
+                        {itemState.User.firstName} {itemState.User.lastName}
+                      </span>
                   </Typography>
 
                 </Link><CardActions><Button variant="contained"><a href={`mailto:${itemState.User.email}`}>I want it!</a></Button></CardActions>

@@ -4,10 +4,10 @@ import {
     Switch,
     TextField,
     Button,
-    Typography
+    Typography,
+    Grid
   } from "@material-ui/core";
   import { useAlert } from "react-alert";
-  import { Box } from "@material-ui/system";
   import styles from "./styles.module.css";
   import { Link, useNavigate } from "react-router-dom";
   import { useEffect, useState } from "react";
@@ -98,13 +98,23 @@ const authenticationEndpoint = API.authUrl
     };
   
     return (
-      <div className={styles.wrapper}>
-        <Box marginTop="40px">
-          <Typography variant="h2" component="div" gutterBottom>
-            Sign Up
-          </Typography>
-        </Box>
-        <Box width="400px" marginTop="20px">
+<Grid container className={styles.wrapper}>
+      <Grid item marginTop="40px" xs={12} lg={12}>
+        <Typography
+          textAlign="center"
+          variant="h2"
+          component="div"
+          gutterBottom
+        >
+          Sign Up
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        xs={10}
+        lg={4}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
           <TextField
             fullWidth
             label="First name"
@@ -112,8 +122,13 @@ const authenticationEndpoint = API.authUrl
             onChange={(e) => setFirstname(e.target.value)}
             variant="outlined"
           />
-        </Box>
-        <Box width="400px" marginTop="20px">
+         </Grid>
+      <Grid
+        item
+        xs={10}
+        lg={4}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
           <TextField
             fullWidth
             label="Last name"
@@ -121,8 +136,13 @@ const authenticationEndpoint = API.authUrl
             onChange={(e) => setLastname(e.target.value)}
             variant="outlined"
           />
-        </Box>
-        <Box width="400px" marginTop="20px">
+        </Grid>
+      <Grid
+        item
+        xs={10}
+        lg={4}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
           <TextField
             fullWidth
             label="Email"
@@ -130,9 +150,14 @@ const authenticationEndpoint = API.authUrl
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             variant="outlined"
-          />
-        </Box>
-        <Box width="400px" marginTop="20px">
+            />
+            </Grid>
+            <Grid
+              item
+              xs={10}
+              lg={4}
+              style={{ display: "flex", justifyContent: "center" }}
+            >
           <TextField
             fullWidth
             label="Password"
@@ -141,8 +166,13 @@ const authenticationEndpoint = API.authUrl
             type="password"
             variant="outlined"
           />
-        </Box>
-        <Box width="400px" marginTop="20px">
+         </Grid>
+      <Grid
+        item
+        xs={10}
+        lg={4}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
           <TextField
             fullWidth
             value={confirmedPassword}
@@ -151,8 +181,13 @@ const authenticationEndpoint = API.authUrl
             type="password"
             variant="outlined"
           />
-        </Box>
-        <Box width="400px" marginTop="20px">
+        </Grid>
+      <Grid
+        item
+        xs={10}
+        lg={4}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
           <TextField
             fullWidth
             label="Bio"
@@ -163,9 +198,14 @@ const authenticationEndpoint = API.authUrl
             rows={2}
             rowsMax={4}
           />
-        </Box>
+        </Grid>
 
-        <Box width="400px" marginTop="20px">
+        <Grid
+          item
+          xs={10}
+          lg={4}
+          style={{ display: "flex", justifyContent: "center" }}
+        >
           <FormGroup>
             <FormControlLabel
               control={
@@ -191,19 +231,28 @@ const authenticationEndpoint = API.authUrl
               />
             </IKContext>
           </FormGroup>
-        </Box>
+          </Grid>
         
-        <Box width="400px" marginTop="10px" display="flex" gap="10px">
-          <Typography variant="body2">Already has Account?</Typography>
+          <Grid
+        item
+        xs={10}
+        lg={4}
+        style={{ display: "flex", justifyContent: "center" }}
+      >          <Typography variant="body2">Already has Account?</Typography>
           <Link to="/signin">Login</Link>
-        </Box>
+        </Grid>
 
-        <Box width="400px" marginTop="40px">
+        <Grid
+        item
+        xs={10}
+        lg={4}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
           <Button onClick={handleSubmit} variant="contained">
             Submit
           </Button>
-        </Box>
-      </div>
+        </Grid>
+        </Grid>
     );
   };
   

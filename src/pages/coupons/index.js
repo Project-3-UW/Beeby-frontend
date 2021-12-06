@@ -1,4 +1,4 @@
-import { Card, CardMedia } from "@material-ui/core";
+import { Card, CardMedia, Grid } from "@material-ui/core";
 import styles from "./styles.module.css";
 
 import support1 from "../../assets/image/support1.jpg";
@@ -20,11 +20,13 @@ const Coupons = () => {
   const renderSupporters = () => {
     return supporters.map((supporter) => {
       return (
-        <Card className={styles.supporterCard} key={supporter.link}>
-          <a href={supporter.link} alt="">
-            <CardMedia component="img" width="100%" image={supporter.poster} />
-          </a>
-        </Card>
+        <Grid key={supporter.link} item xs={12} lg={4}>
+          <Card className={styles.supporterCard} key={supporter.link}>
+            <a href={supporter.link} alt="">
+              <CardMedia component="img" width="100%" image={supporter.poster} />
+            </a>
+          </Card>
+        </Grid>
       );
     });
   };
