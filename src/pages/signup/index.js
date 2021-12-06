@@ -4,35 +4,20 @@ import {
     Switch,
     TextField,
     Button,
-    Typography,
-    Select,
-    MenuItem,
-    FormControl,
-    InputLabel,
+    Typography
   } from "@material-ui/core";
   import { useAlert } from "react-alert";
   import { Box } from "@material-ui/system";
   import styles from "./styles.module.css";
   import { Link, useNavigate } from "react-router-dom";
   import { useEffect, useState } from "react";
-  import { signUp } from "./service/request";
   import { getLocation } from "../../utils/location";
   import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
   import { API } from "../../utils/API"
 
 const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
 const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
-const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when deployed
-  const babyAgeRange = [
-    "0-6m",
-    "6-12m",
-    "12-18m",
-    "18-24m",
-    "2-3 years",
-    "3-4 years",
-    "4 years and up",
-  ];
-  
+const authenticationEndpoint = API.authUrl
   const SignUp = () => {
     const navigate = useNavigate();
     
@@ -42,7 +27,6 @@ const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
-    const [babyAge, setBabyAge] = useState("");
     const [password, setPassword] = useState("");
     const [confirmedPassword, setConfirmedPassword] = useState("");
     const [position, setPosition] = useState([]);
