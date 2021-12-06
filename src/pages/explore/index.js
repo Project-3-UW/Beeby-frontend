@@ -96,7 +96,7 @@ const Explore = (props) => {
         </Box>
         </Grid>
       <Grid item xs={12} lg={6}>
-      <Items items={latestItems} />
+      <Items items={filteredItems} />
       </Grid>
     </Grid>
   );
