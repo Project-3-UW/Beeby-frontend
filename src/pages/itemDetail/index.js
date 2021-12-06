@@ -14,6 +14,8 @@ import {
   Select,
   MenuItem,
   Button,
+  Avatar,
+  Grid
 } from "@material-ui/core";
 
 
@@ -95,11 +97,13 @@ const ItemDetail = ({ user }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Badge badgeContent={status} color="secondary">
-        <Typography variant="h3" textAlign="center" component="h1">
+        <Typography variant="h3" textAlign="center" component="h1" className={styles.title}>
           {itemState.title}
-        </Typography>
+        </Typography> 
+        <Grid>    
+         <Badge badgeContent={status} color="secondary" className={styles.badge}>
       </Badge>
+      </Grid>
       <Box width="100%">
         {/* <Typography variant="h4">Photos</Typography> */}
         <Box width="100%" display="flex" flexWrap="wrap">
@@ -150,16 +154,23 @@ const ItemDetail = ({ user }) => {
                 </FormControl>
               ) : (
                 <>
-                  <Link to={"/profile/" + itemState.User.id}>
-                    <Typography variant="h6" color="text.secondary">
-                      Posted By: {itemState.User.firstName} {itemState.User.lastName}
-                      <img
+                <Link to={"/profile/" + itemState.User.id}>
+                <Typography
+                      variant="h6"
+                      display="flex"
+                      color="text.secondary"
+                    >
+                      <span>Posted By:</span>
+                      <Avatar
+                        style={{ marginLeft: "15px", marginRight: "15px" }}
                         src={itemState.User.UserImg.url}
                         key={itemState.User.UserImg.id}
                         alt={itemState.title}
-                        className={styles.itemImage}
                         loading="lazy" />
-                    </Typography>
+                      <span>
+                        {itemState.User.firstName} {itemState.User.lastName}
+                      </span>
+                  </Typography>
 
                   </Link><CardActions><Button variant="contained">
                     <Mailto email={itemState.User.email} subject="I am interested in your item!" body={`Hello! I am interested in your item, ${itemState.title}! Please email me back so we can discuss a time and place to meet.`}>

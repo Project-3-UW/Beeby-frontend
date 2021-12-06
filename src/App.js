@@ -4,7 +4,6 @@ import Explore from "./pages/explore";
 import SignIn from "./pages/signin";
 import SignUp from "./pages/signup";
 import styles from "./layout.module.css";
-import Header from "./components/header";
 import Profile from "./pages/profile";
 import ProfileById from "./pages/profile/profileById";
 import Signout from "./pages/signout";
@@ -12,7 +11,8 @@ import ItemDetail from "./pages/itemDetail";
 import Resources from "./pages/resources";
 import Coupons from "./pages/coupons";
 import React, { useEffect, useState } from "react";
-import API from "./utils/API"
+import API from "./utils/API";
+import ResponsiveAppBar from "./components/appBar";
 function App() {
   // eslint-disable-next-line
   const [userState, setUserState] = useState({})
@@ -53,7 +53,7 @@ function App() {
     <Router>
       <div className={styles.wrapper}>
         <div className={styles.header}>
-          <Header />
+        <ResponsiveAppBar />
         </div>
         <div className={styles.content}>
           <Routes>

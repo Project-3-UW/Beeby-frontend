@@ -10,6 +10,7 @@ const Item = ({ item }) => {
     itemImg = <CardMedia
       component="img"
       image={item.ItemImgs[0].url}
+      className={styles.img}
     />;
   } else {
     itemImg = <CardMedia
