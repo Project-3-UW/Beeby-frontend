@@ -4,8 +4,7 @@ const ResourceItem = ({ name, link }) => {
   return (
     <div className={styles.wrapper}>
       <a href={link}>
-        <Button>{name}</Button>
-      </a>
+      <Button style={{ color: "#72625d" }}>{name}</Button>      </a>
     </div>
   );
 };

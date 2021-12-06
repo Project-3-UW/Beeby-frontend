@@ -12,6 +12,10 @@
   background-color: #fae087;
 }
 
+.queryKey {
+  width: 100%;
+}
+
 .selecter {
   margin-top: 10px;
   background-color: white;

@@ -8,3 +8,13 @@
   margin-right: 10px;
   width: 300px;
 }
+.badge {
+  float:left;
+  margin-left:70px;
+  margin-top: 30px;
+
+}
+.title {
+  float: left;
+  margin-left:10px;
+}

@@ -1,4 +1,5 @@
-import { Button, Typography } from "@material-ui/core";
+import { Button, Typography, Grid } from "@material-ui/core";
+import { style } from "@material-ui/system";
 import { Link } from "react-router-dom";
 
 import bannerImage from "../../assets/image/banner.jpg";
@@ -12,11 +13,17 @@ const Home = () => {
     <div className={styles.wrapper}>
       <div
         className={styles.banner}
-        style={{ background: `url(${bannerImage})` }}
+        style={{
+          background: `url(${bannerImage})`,
+          backgroundRepeat: "no-repeat",
+
+        }}
       >
-        <Typography variant="h4" component="div" gutterBottom>
+        <Grid className={styles.background}>
+        <Typography variant="h4" component="div" color="white" gutterBottom>
           A place just for you and your little ones
         </Typography>
+        </Grid>
         <Link to="/explore">
           <Button variant="contained" color="inherit">
             Explore
@@ -35,7 +42,7 @@ const Home = () => {
             Ready to share and swap ? <br /> Join us today!
           </Typography>
           <Link to="/signup">
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" style={{ background: "#a6cdc0" }}>
               Sign up
             </Button>
           </Link>

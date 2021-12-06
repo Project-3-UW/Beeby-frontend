@@ -136,9 +136,9 @@ const Querier = ({changeQueryHandler}) => {
             {querierConfig.label}
           </Typography>
 
-          <FormControl>
+          <FormControl style={{ width: "100%" }}>
             <Select
-              style={{ width: "300px" }}
+              fullWidth
               onChange={(e) =>
                 handleValueChange(querierConfig.key, e.target.value)
               }

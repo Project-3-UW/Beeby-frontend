@@ -16,11 +16,9 @@ const ItemCard = ({ cardActionComponents }) => {
         image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
       />
       <CardContent>
-        <Badge badgeContent={"Available"} color="secondary">
           <Typography gutterBottom variant="h5" component="div">
             Goods Name
           </Typography>
-        </Badge>
         <Typography variant="h6" color="text.secondary">
           category: xx
         </Typography>
@@ -39,7 +37,9 @@ const ItemCard = ({ cardActionComponents }) => {
         <Typography variant="h6" color="text.secondary">
           description: xx
         </Typography>
-        <CardActions>{cardActionComponents}</CardActions>
+        <Badge badgeContent={"Available"} color="secondary">
+        </Badge>
+        <CardActions>{cardActionComponents}</CardActions>  
       </CardContent>
     </Card>
   );

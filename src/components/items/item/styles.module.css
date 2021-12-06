@@ -3,7 +3,7 @@
 }
 .itemBox {
   width: 300px;
-  height: 330px;
+  height: 450px;
   text-overflow: ellipsis;
 }
 .title {
@@ -19,4 +19,8 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+}
+.img{
+  width: 270px;
+  height:400px;
 }
