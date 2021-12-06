@@ -17,6 +17,13 @@ import {
 } from "@material-ui/core";
 
 
+const Mailto = ({ email, subject = '', body = '', children }) => {
+  let params = subject || body ? '?' : '';
+  if (subject) params += `subject=${encodeURIComponent(subject)}`;
+  if (body) params += `${subject ? '&' : ''}body=${encodeURIComponent(body)}`;
+  return <a href={`mailto:${email}${params}`}>{children}</a>;
+};
+
 const ItemDetail = ({ user }) => {
   const userIdLocal = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
@@ -143,24 +150,27 @@ const ItemDetail = ({ user }) => {
                 </FormControl>
               ) : (
                 <>
-                <Link to={"/profile/" + itemState.User.id}>
-                  <Typography variant="h6" color="text.secondary">
-                    Posted By: {itemState.User.firstName} {itemState.User.lastName}
-                    <img
-                      src={itemState.User.UserImg.url}
-                      key={itemState.User.UserImg.id}
-                      alt={itemState.title}
-                      className={styles.itemImage}
-                      loading="lazy" />
-                  </Typography>
+                  <Link to={"/profile/" + itemState.User.id}>
+                    <Typography variant="h6" color="text.secondary">
+                      Posted By: {itemState.User.firstName} {itemState.User.lastName}
+                      <img
+                        src={itemState.User.UserImg.url}
+                        key={itemState.User.UserImg.id}
+                        alt={itemState.title}
+                        className={styles.itemImage}
+                        loading="lazy" />
+                    </Typography>
 
-                </Link><CardActions><Button variant="contained"><a href={`mailto:${itemState.User.email}`}>I want it!</a></Button></CardActions>
+                  </Link><CardActions><Button variant="contained">
+                    <Mailto email={itemState.User.email} subject="I am interested in your item!" body={`Hello! I am interested in your item, ${itemState.title}! Please email me back so we can discuss a time and place to meet.`}>
+                      I want it!
+                    </Mailto>
+                  </Button></CardActions>
                 </>
               )}
             </CardContent>
           </Card>
         </Box>
-
       </Box>
     </div>
   );
