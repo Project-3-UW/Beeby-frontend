@@ -26,7 +26,7 @@ To contribute, contact us below!
 This application is covered under the MIT License
 
 ## Links
-[Repository](https://github.com/Project-3-UW/project3-frontend) () 
+[Repository](https://github.com/Project-3-UW/project3-frontend)
 
 
 ## Questions
