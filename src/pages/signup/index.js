@@ -22,17 +22,7 @@ import {
 
 const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
 const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
-const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when deployed
-  const babyAgeRange = [
-    "0-6m",
-    "6-12m",
-    "12-18m",
-    "18-24m",
-    "2-3 years",
-    "3-4 years",
-    "4 years and up",
-  ];
-  
+const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when deployed  
   const SignUp = () => {
     const navigate = useNavigate();
     
