@@ -7,6 +7,7 @@ const URL_PREFIX = "https://beeby-backend.herokuapp.com"
 const token = localStorage.getItem("token");
 
 export const API = {
+    authUrl: URL_PREFIX + "/auth",
     login: (loginFormState) => {
         return axios.post(`${URL_PREFIX}/api/users/login`, loginFormState)
     },
