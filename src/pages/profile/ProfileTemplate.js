@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom'
 import { Link, useNavigate } from "react-router-dom";
 import Items from "../../components/items";
 import AddItem from "../../components/itemDialog";
-import UserInfo from "./components/userInfo/index";
-import { createItem } from "./services/request";
 import styles from "./styles.module.css";
 import { useAlert } from "react-alert";
 import API from "../../utils/API"
@@ -73,12 +71,14 @@ const ProfileTemplate = () => {
     setOpenAddDiloag(true);
   };
 
-  const handleSubmit = async (item) => {
+  const handleSubmit = (item) => {
     console.log(item)
-    const res = await createItem(item);
-    console.log(res);
-    alert.success("Success to Create!");
-    setOpenAddDiloag(false);
+    API.createItem(item).then(res=>{
+      console.log(res);
+      alert.success("Success to Create!");
+      setOpenAddDiloag(false);
+    })
+
   };
 
   return (
@@ -111,11 +111,6 @@ const ProfileTemplate = () => {
             <Typography variant="h6" color="text.secondary">
               About me: {userState.bio}
             </Typography>
-            {/* <Typography variant="h6" color="text.secondary">
-              <FormControl>
-                Share: <FormControlLabel control={<Switch />} label="Location" />
-              </FormControl>
-            </Typography> */}
           </CardContent>
         </Card>
 

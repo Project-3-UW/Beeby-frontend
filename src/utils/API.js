@@ -15,15 +15,19 @@ export const API = {
         lastName,
         email,
         password,
+        longitude,
         latitude,
-        longitude) => {
+        bio,
+        userImg) => {
         return axios.post(`${URL_PREFIX}/api/users/signup`, {
             firstName,
             lastName,
             email,
             password,
-            latitude,
             longitude,
+            latitude,
+            bio,
+            userImg
           });
     },
     getItems: () => {
@@ -50,6 +54,13 @@ export const API = {
     },
     getUserLocation: (id) => {
         return axios.get(`${URL_PREFIX}/api/users/${id}/location`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+    },
+    createItem: (item) => {
+        return axios.post(`${URL_PREFIX}/api/items`, item, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
