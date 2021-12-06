@@ -19,11 +19,11 @@ import { useState } from "react";
 import FileUploader from "../fileUploader";
 import styles from "./styles.module.css";
 import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
+import API from "../../utils/API"
 
 const publicKey = 'public_t+4VajkBmNbytb2Sa80EQD4geXo=';
 const urlEndpoint = 'https://ik.imagekit.io/beebyapp';
-const authenticationEndpoint = 'http://localhost:3001/auth'; //TODO: change when deployed
-// const authenticationEndpoint = 'https://beeby-backend.herokuapp.com/'; //TODO: change when deployed
+const authenticationEndpoint = API.authUrl
 
 
 const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
@@ -72,8 +72,31 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
+      
       <DialogTitle id="alert-dialog-title">New Item</DialogTitle>
       <DialogContent className={styles.forms}>
+      <Box width="600px">
+      <div>add pictures for your item:</div>
+          <FormControl component="fieldset" className={styles.formControl}>
+            <FormLabel component="legend" className={styles.formItem}>
+            </FormLabel>
+            <FileUploader onFilesChange={handleFilesChange} multiple={false} />
+            <IKContext 
+              publicKey={publicKey} 
+              urlEndpoint={urlEndpoint} 
+              authenticationEndpoint={authenticationEndpoint} >
+              <IKUpload
+                fileName="item.jpg"
+                isPrivateFile={false}
+                useUniqueFileName={true}
+                folder={"/itemImg"}
+                onError={onError}
+                onSuccess={onSuccess}
+              />
+            </IKContext>
+          </FormControl>
+        </Box>
+
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">Title</FormLabel>
           <TextField
@@ -203,27 +226,6 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
             />
           </RadioGroup>
         </FormControl>
-
-        <Box width="600px">
-          <FormControl component="fieldset" className={styles.formControl}>
-            <FormLabel component="legend" className={styles.formItem}>
-            </FormLabel>
-            <FileUploader onFilesChange={handleFilesChange} multiple={false} />
-            <IKContext 
-              publicKey={publicKey} 
-              urlEndpoint={urlEndpoint} 
-              authenticationEndpoint={authenticationEndpoint} >
-              <IKUpload
-                fileName="item.jpg"
-                isPrivateFile={false}
-                useUniqueFileName={true}
-                folder={"/itemImg"}
-                onError={onError}
-                onSuccess={onSuccess}
-              />
-            </IKContext>
-          </FormControl>
-        </Box>
       </DialogContent>
       <DialogActions>
         <Button variant="contained" color="inherit" onClick={onCancel}>

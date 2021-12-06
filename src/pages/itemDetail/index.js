@@ -24,8 +24,6 @@ const ItemDetail = ({ user }) => {
   const contact = (user.email)
   console.log(contact)
 
-  // user.email is avaible from props like so console.log(user.email) 
-
   const [isSelfState, setIsSelfState] = useState(false)
 
   const { id } = useParams()
