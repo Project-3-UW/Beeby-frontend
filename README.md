@@ -4,7 +4,7 @@
 This app allows parents to trade old/unused clothes and items for parents in need. It also has coupons and resources for parents.
 
 ## Table of Contents
-- [Workout Tracker]
+- [BeeBy]
   - [Description](#description)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
@@ -20,7 +20,7 @@ Visit the app [here!](https://beeby-backend.herokuapp.com/)
 
 
 ## Contributing
-To contribute, contact ud below!
+To contribute, contact us below!
 
 ## License
 This application is covered under the MIT License
