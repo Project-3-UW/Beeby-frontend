@@ -6,13 +6,9 @@
   justify-content: center;
 }
 
-.dropdown {
-  background: #ffffff;
-  color: red;
-  border: 2px solid red;
-  border-radius: 3px;
-  padding: 5px 10px;
-  text-transform: uppercase;
-  width: "400px"; 
-  margin-top: 20px;
+.signupDetail{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

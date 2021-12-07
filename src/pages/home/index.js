@@ -21,7 +21,7 @@ const Home = () => {
       >
         <Grid className={styles.background}>
         <Typography variant="h4" component="div" color="white" gutterBottom>
-          A place just for you and your little ones
+          - A place just for you and your little ones -
         </Typography>
         </Grid>
         <Link to="/explore">

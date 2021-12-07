@@ -46,10 +46,10 @@ const SignIn = (props) => {
 
   return (
     <div className={styles.wrapper}>
-      <form onSubmit={handleLogin} className="LoginForm"> 
+      <form onSubmit={handleLogin}> 
         <Box marginTop="40px">
           <Typography variant="h2" component="div" gutterBottom>
-            Sign In
+            Login
           </Typography>
         </Box>
         <Box width="100%" marginTop="20px">
@@ -73,8 +73,8 @@ const SignIn = (props) => {
             variant="outlined"
           />
           <Box marginTop="10px" display="flex" gap="10px">
-            <Typography variant="body2">Not has Account?</Typography>
-            <Link to="/signup">Register</Link>
+            <Typography variant="body2">Need a new account?</Typography>
+            <Link to="/signup">Sign Up</Link>
           </Box>
         </Box>
         <Box width="100%" marginTop="40px">
