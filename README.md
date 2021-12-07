@@ -15,3 +15,4 @@ So we created Beeby, a swap platform that support parents and families to share 
 ![beeby2](./src/assets/image/beeby2.png)
 
 ## Questions? Contact Us [Here](mailto:beebycontact@gmail.com)
+## [App Presentation](https://www.canva.com/design/DAExbamL--k/QcqI_Z1tzh_Q6FmnxiaqVQ/view?utm_content=DAExbamL--k&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
