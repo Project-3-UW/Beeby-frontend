@@ -1,5 +1,4 @@
 # BeeBy [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-## Description
 ![beebyLogo](./src/assets/image/logo.png)
 
 Beeby is an online swap platform purely build for parents and families to exchange items and help others in needs.
