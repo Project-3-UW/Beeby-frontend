@@ -7,7 +7,7 @@ As busy parents, it's always nice to have an app that is simple and easy to swap
 
 So we created Beeby, a swap platform that support parents and families to share and save, and create a sustainable community for their little ones.
 
-## Visit the app [here!](https://beeby-backend.herokuapp.com/)
+## Visit the app [here!](https://beeby.herokuapp.com/)
 
 ## A Quick Look of the app
 ![beeby3](./src/assets/image/beeby3.png)
