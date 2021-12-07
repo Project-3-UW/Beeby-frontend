@@ -1,10 +1,16 @@
 .wrapper {
   width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .itemBox {
   width: 300px;
   height: 450px;
   text-overflow: ellipsis;
+  margin:5px;
+  padding: 3px;
+
 }
 .title {
   overflow: hidden;
@@ -12,6 +18,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+
 }
 .description {
   overflow: hidden;
@@ -22,5 +29,6 @@
 }
 .img{
   width: 270px;
-  height:400px;
+  height:350px;
+  border-radius: 5px;
 }

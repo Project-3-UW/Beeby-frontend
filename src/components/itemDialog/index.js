@@ -76,7 +76,7 @@ const ItemDialog = ({ open = false, onSubmit, onCancel, item = {} }) => {
       <DialogTitle id="alert-dialog-title">New Item</DialogTitle>
       <DialogContent className={styles.forms}>
       <Box width="600px">
-      <div>add pictures for your item:</div>
+      <FormLabel component="legend">Add pictures for your item:</FormLabel>
           <FormControl component="fieldset" className={styles.formControl}>
             <FormLabel component="legend" className={styles.formItem}>
             </FormLabel>

@@ -22,7 +22,7 @@ const Coupons = () => {
       return (
         <Grid key={supporter.link} item xs={12} lg={4}>
           <Card className={styles.supporterCard} key={supporter.link}>
-            <a href={supporter.link} alt="">
+            <a href={supporter.link}  target="_blank" alt="">
               <CardMedia component="img" width="100%" image={supporter.poster} />
             </a>
           </Card>
