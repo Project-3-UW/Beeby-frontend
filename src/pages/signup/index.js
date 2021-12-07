@@ -99,7 +99,7 @@ const SignUp = () => {
 
   return (
     <Grid container className={styles.wrapper}>
-      <Grid item marginTop="40px" xs={12} lg={12}>
+      <Grid item marginTop="40px" xs={12} lg={12} style={{ display: "flex", flexDirection:"column", justifyContent: "center" }}>
         <Typography
           textAlign="center"
           variant="h2"
@@ -112,8 +112,7 @@ const SignUp = () => {
       <Grid
         item
         xs={10}
-        lg={4}
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ margin:"10px" }}
       >
         <TextField
           fullWidth
@@ -126,8 +125,7 @@ const SignUp = () => {
       <Grid
         item
         xs={10}
-        lg={4}
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ margin:"10px" }}
       >
         <TextField
           fullWidth
@@ -140,8 +138,7 @@ const SignUp = () => {
       <Grid
         item
         xs={10}
-        lg={4}
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ margin:"10px" }}
       >
         <TextField
           fullWidth
@@ -155,8 +152,7 @@ const SignUp = () => {
       <Grid
         item
         xs={10}
-        lg={4}
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ margin:"10px" }}
       >
         <TextField
           fullWidth
@@ -170,8 +166,7 @@ const SignUp = () => {
       <Grid
         item
         xs={10}
-        lg={4}
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ margin:"10px" }}
       >
         <TextField
           fullWidth
@@ -185,8 +180,7 @@ const SignUp = () => {
       <Grid
         item
         xs={10}
-        lg={4}
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ margin:"10px" }}
       >
         <TextField
           fullWidth
@@ -203,8 +197,7 @@ const SignUp = () => {
       <Grid
         item
         xs={10}
-        lg={4}
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ margin:"5px" }}
       >
         <FormGroup>
           <FormControlLabel
@@ -236,17 +229,16 @@ const SignUp = () => {
       <Grid
         item
         xs={10}
-        lg={4}
-        style={{ display: "flex", justifyContent: "center" }}
-      >          <Typography variant="body2">Already has Account?</Typography>
-        <Link to="/signin">Login</Link>
+        style={{ margin:"10px" }}
+      >
+      <Typography variant="body2">Already has Account?<Link to="/signin">Login</Link></Typography>
+        
       </Grid>
 
       <Grid
         item
         xs={10}
-        lg={4}
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ margin:"10px" }}
       >
         <Button onClick={handleSubmit} variant="contained">
           Submit

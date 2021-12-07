@@ -17,6 +17,7 @@ import {
   Avatar,
   Grid
 } from "@material-ui/core";
+import Moment from 'react-moment'
 
 
 const Mailto = ({ email, subject = '', body = '', children }) => {
@@ -134,7 +135,7 @@ const ItemDetail = ({ user }) => {
                 Age range: {itemState.ageRange}
               </Typography>
               <Typography variant="h6" color="text.secondary">
-                Item Posted: {itemState.createdAt}
+                Item Posted: <Moment format="MM/DD/YYYY">{itemState.createdAt}</Moment>
               </Typography>
 
               {isSelfState ? (

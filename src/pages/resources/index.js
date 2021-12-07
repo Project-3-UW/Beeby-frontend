@@ -72,7 +72,7 @@ const Resources = () => {
       };
       return (
         <Grid item key={resource.type} xs={12} lg={12}>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" className={styles.title}>
             {resource.title}
           </Typography>
           <Grid container spacing={1}>

@@ -6,7 +6,8 @@ import Items from "../../components/items";
 import AddItem from "../../components/itemDialog";
 import styles from "./styles.module.css";
 import { useAlert } from "react-alert";
-import API from "../../utils/API"
+import API from "../../utils/API";
+import Moment from 'react-moment'
 
 const ProfileTemplate = () => {
   const userIdLocal = localStorage.getItem("userId");
@@ -102,11 +103,11 @@ const ProfileTemplate = () => {
                   loading="lazy"
                 />
               </Typography>
-            <Typography variant="h6" color="text.secondary">
+            <Typography variant="h6" color="text.secondary" styles="margin-top: 5px">
               Name: {userState.name} {userState.lastName}
             </Typography>
             <Typography variant="h6" color="text.secondary">
-              Join Beeby since: {userState.createdAt}
+              Join Beeby since: <Moment format="MM/DD/YYYY">{userState.createdAt}</Moment>
             </Typography>
             <Typography variant="h6" color="text.secondary">
               About me: {userState.bio}

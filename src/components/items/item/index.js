@@ -1,4 +1,5 @@
 import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { CenterFocusStrong } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
@@ -22,7 +23,8 @@ const Item = ({ item }) => {
   return (
     <div className={styles.wrapper}>
       <Link to={itemUrl}>
-        <Card className={styles.itemBox}>
+        {/* need to fix the center of the card issue */}
+        <Card className={styles.itemBox} style={{display:"flex", justifyContent:"center", alignContent:"center"}}> 
         <CardContent>
           {itemImg}
           <Typography
@@ -32,14 +34,6 @@ const Item = ({ item }) => {
             component="div"
           >
             {item.title}
-          </Typography>
-          <Typography
-            className={styles.description}
-            variant="body2"
-            textOverflow="ellipsis"
-            color="text.secondary"
-          >
-            {/* {item.description} */}
           </Typography>
         </CardContent>
       </Card>
