@@ -33,7 +33,9 @@ const Explore = (props) => {
   const [filteredItems, setFilteredItems] = useState([]);
 
   const checkDistance = (withinRange, item) => {
-    return calculateDistance(currentUserLocation.longitude, currentUserLocation.latitude, item.User.longitude, item.User.latitude) < withinRange
+    const dis = calculateDistance(currentUserLocation.longitude, currentUserLocation.latitude, item.User.longitude, item.User.latitude);
+    console.log(dis)
+    return dis  < withinRange;
   }
 
   const handleFilterOptionChange = async (key,value)=>{
@@ -57,7 +59,6 @@ const Explore = (props) => {
       if(filterState.distance.length > 0) {
         distanceNotSelected = false
       }
-
       return  (conditionNotSelected || item.condition == filterState.condition) &&
               (categoryNotSelected || item.category == filterState.category) &&
               (ageNotSelected || item.ageRange == filterState.age) && 

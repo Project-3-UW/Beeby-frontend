@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import styles from "./styles.module.css";
 import React, { useEffect, useState } from "react";
 import API from "../../utils/API"
@@ -19,7 +19,6 @@ import {
 } from "@material-ui/core";
 import Moment from 'react-moment'
 
-
 const Mailto = ({ email, subject = '', body = '', children }) => {
   let params = subject || body ? '?' : '';
   if (subject) params += `subject=${encodeURIComponent(subject)}`;
@@ -28,6 +27,7 @@ const Mailto = ({ email, subject = '', body = '', children }) => {
 };
 
 const ItemDetail = ({ user }) => {
+  const navigate = useNavigate();
   const userIdLocal = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
@@ -96,24 +96,32 @@ const ItemDetail = ({ user }) => {
     })
   }
 
+  const handleWantItButton = (e)=>{
+    console.log(token)
+    if(!token) {
+      e.preventDefault();
+      console.log("user not logged in, redirecting to sign in")
+      navigate("/signin")
+    } 
+    //else proceed to propogate event
+  }
+
   return (
     <div className={styles.wrapper}>
-        <Typography variant="h3" textAlign="center" component="h1" className={styles.title}>
-          {itemState.title}
-        </Typography> 
-        <Grid>    
-         <Badge badgeContent={status} color="secondary" className={styles.badge}>
-      </Badge>
+      <Typography variant="h3" textAlign="center" component="h1" className={styles.title}>
+        {itemState.title}
+      </Typography>
+      <Grid>
+        <Badge badgeContent={status} color="secondary" className={styles.badge}>
+        </Badge>
       </Grid>
       <Box width="100%">
-        {/* <Typography variant="h4">Photos</Typography> */}
         <Box width="100%" display="flex" flexWrap="wrap">
           {itemState.itemImagesData}
         </Box>
       </Box>
       <Box width="100%" gap="100px">
         <Box>
-          {/* <Typography variant="h4">Details</Typography> */}
           <Card className={styles.itemWrapper} sx={{ width: "100%" }}>
             <CardContent>
               <Typography variant="h6" color="text.secondary">
@@ -155,8 +163,8 @@ const ItemDetail = ({ user }) => {
                 </FormControl>
               ) : (
                 <>
-                <Link to={"/profile/" + itemState.User.id}>
-                <Typography
+                  <Link to={"/profile/" + itemState.User.id}>
+                    <Typography
                       variant="h6"
                       display="flex"
                       color="text.secondary"
@@ -171,13 +179,16 @@ const ItemDetail = ({ user }) => {
                       <span>
                         {itemState.User.firstName} {itemState.User.lastName}
                       </span>
-                  </Typography>
+                    </Typography>
 
-                  </Link><CardActions><Button variant="contained">
-                    <Mailto email={itemState.User.email} subject="I am interested in your item!" body={`Hello! I am interested in your item, ${itemState.title}! Please email me back so we can discuss a time and place to meet.`}>
-                      I want it!
-                    </Mailto>
-                  </Button></CardActions>
+                  </Link>
+                  <CardActions>
+                    <Button id="requestBtn" variant="contained" onClick={handleWantItButton} className="button">
+                      <Mailto email={itemState.User.email} subject="I am interested in your item!" body={`Hello! I am interested in your item, ${itemState.title}! Please email me back so we can discuss a time and place to meet. Thank you!`}>
+                        I want it!
+                      </Mailto>
+                    </Button>
+                  </CardActions>
                 </>
               )}
             </CardContent>
